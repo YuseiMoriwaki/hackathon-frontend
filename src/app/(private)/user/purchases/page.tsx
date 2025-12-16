@@ -1,12 +1,15 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Container } from '@/components/layouts';
-import { Card, LoadingSpinner } from '@/components/ui';
+import { Card, LoadingSpinner, GlassButton } from '@/components/ui';
 import { useAuth } from '@/features/auth';
 import { usePurchaseHistory } from '@/features/purchase';
 import Link from 'next/link';
 
 export default function PurchasesPage() {
+  const router = useRouter();
   const { user } = useAuth();
   const { purchases, isLoading, isError } = usePurchaseHistory(user?.id || '');
 
@@ -15,9 +18,14 @@ export default function PurchasesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-14 pb-24">
+      <div className="fixed top-20 left-4 z-40">
+        <GlassButton onClick={() => router.back()} ariaLabel="戻る">
+          <ArrowLeft className="w-5 h-5 text-white" />
+        </GlassButton>
+      </div>
+      <main className="flex-1 pt-20 pb-24">
         <Container className="py-8">
-          <h1 className="text-3xl font-bold text-white mb-8">購入履歴</h1>
+          <h1 className="text-3xl font-bold text-white mb-8 pl-12 md:pl-0">購入履歴</h1>
 
           {isLoading ? (
             <div className="flex justify-center items-center h-64">

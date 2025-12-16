@@ -25,7 +25,7 @@ export function UserListingsPage({ userId }: UserListingsPageProps) {
   if (isError) {
     return (
       <Container className="py-8">
-        <div className="text-center text-red-600">
+        <div className="text-center text-red-300">
           出品一覧の読み込みに失敗しました
         </div>
       </Container>
@@ -34,7 +34,7 @@ export function UserListingsPage({ userId }: UserListingsPageProps) {
 
   return (
     <Container className="py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">出品中の商品</h1>
+      <h1 className="text-3xl font-bold text-white mb-8 pl-12 md:pl-0">出品中の商品</h1>
       
       {items && items.length > 0 ? (
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6">
@@ -43,7 +43,7 @@ export function UserListingsPage({ userId }: UserListingsPageProps) {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-500 py-16">
+        <div className="text-center text-white/50 py-16">
           出品中の商品はありません
         </div>
       )}

@@ -41,7 +41,7 @@ export function UserProfilePage({ userId, canEdit = false }: UserProfilePageProp
   if (!user) {
     return (
       <Container className="py-8">
-        <div className="text-center text-red-600">
+        <div className="text-center text-red-300">
           ユーザーが見つかりません
         </div>
       </Container>
@@ -51,8 +51,8 @@ export function UserProfilePage({ userId, canEdit = false }: UserProfilePageProp
   return (
     <Container className="py-8">
       <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="flex justify-between items-center mb-6 pl-12 md:pl-0">
+          <h1 className="text-3xl font-bold text-white">
             {isEditing ? 'プロフィール編集' : 'プロフィール'}
           </h1>
           {canEdit && !isEditing && (

@@ -17,8 +17,8 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
   const currentOrder = steps.find(step => step.id === currentStep)?.order || 1;
 
   return (
-    <div className="w-full py-8">
-      <div className="flex items-center justify-between max-w-2xl mx-auto">
+    <div className="w-full py-4">
+      <div className="flex items-center justify-between max-w-2xl mx-auto px-4">
         {steps.map((step, index) => {
           const isCompleted = step.order < currentOrder;
           const isCurrent = step.id === currentStep;
@@ -29,20 +29,20 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
               {/* Step Circle */}
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                     isCompleted
-                      ? 'bg-green-500/20 border-2 border-green-500/50'
+                      ? 'bg-green-500/15 border border-green-500/40'
                       : isCurrent
-                      ? 'bg-blue-500/20 border-2 border-blue-500/50 scale-110'
-                      : 'bg-white/5 border-2 border-white/20'
+                      ? 'bg-blue-500/15 border border-blue-500/40'
+                      : 'bg-white/3 border border-white/15'
                   }`}
                 >
                   {isCompleted ? (
-                    <Check className="w-6 h-6 text-green-400" />
+                    <Check className="w-5 h-5 text-green-400" />
                   ) : (
                     <span
-                      className={`font-bold ${
-                        isCurrent ? 'text-blue-300' : 'text-white/50'
+                      className={`text-sm font-semibold ${
+                        isCurrent ? 'text-blue-300' : 'text-white/40'
                       }`}
                     >
                       {step.order}
@@ -50,8 +50,8 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                   )}
                 </div>
                 <span
-                  className={`mt-2 text-sm font-medium transition-colors duration-300 ${
-                    isCurrent ? 'text-white' : 'text-white/50'
+                  className={`mt-1.5 text-xs font-medium transition-colors duration-300 ${
+                    isCurrent ? 'text-white/90' : 'text-white/40'
                   }`}
                 >
                   {step.label}
@@ -60,10 +60,10 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
 
               {/* Connecting Line */}
               {!isLast && (
-                <div className="flex-1 h-0.5 mx-4 mb-6">
+                <div className="flex-1 h-px mx-3 mb-5">
                   <div
                     className={`h-full transition-all duration-500 ${
-                      isCompleted ? 'bg-green-500/50' : 'bg-white/10'
+                      isCompleted ? 'bg-green-500/40' : 'bg-white/10'
                     }`}
                   />
                 </div>

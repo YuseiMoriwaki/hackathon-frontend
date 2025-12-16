@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/layouts';
-import { LoadingSpinner } from '@/components/ui';
+import { LoadingSpinner, GlassButton } from '@/components/ui';
 import { useItem } from '@/features/items';
 import { usePurchase } from '@/features/purchase/hooks/usePurchase';
 import type { CheckoutStep, ShippingAddress, PaymentMethod } from '../types';
@@ -25,13 +26,13 @@ export function CheckoutPage({ itemId }: CheckoutPageProps) {
   const [error, setError] = useState<string>('');
 
   const [shippingAddress, setShippingAddress] = useState<ShippingAddress>({
-    postalCode: '',
-    prefecture: '',
-    city: '',
-    address: '',
-    building: '',
-    name: '',
-    phone: '',
+    postalCode: '150-0001',
+    prefecture: '東京都',
+    city: '渋谷区',
+    address: '神宮前1-2-3',
+    building: 'サンプルビル101',
+    name: '山田太郎',
+    phone: '090-1234-5678',
   });
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('credit');
@@ -159,44 +160,58 @@ export function CheckoutPage({ itemId }: CheckoutPageProps) {
   }
 
   return (
-    <Container className="py-8">
-      <div className="max-w-3xl mx-auto">
-        <ProgressBar currentStep={currentStep} />
-
-        <div className="glass-card p-8 mt-8">
-          {currentStep === 'shipping' && (
-            <ShippingStep
-              shippingAddress={shippingAddress}
-              onChange={setShippingAddress}
-              onNext={handleShippingNext}
-              onBack={handleBack}
-              error={error}
-            />
-          )}
-
-          {currentStep === 'payment' && (
-            <PaymentStep
-              paymentMethod={paymentMethod}
-              onChange={setPaymentMethod}
-              onNext={handlePaymentNext}
-              onBack={handleBack}
-            />
-          )}
-
-          {currentStep === 'confirm' && (
-            <ConfirmStep
-              item={item}
-              shippingAddress={shippingAddress}
-              paymentMethod={paymentMethod}
-              onConfirm={handleConfirm}
-              onBack={handleBack}
-              isLoading={isPurchasing}
-              error={error}
-            />
-          )}
+    <>
+      {/* Fixed Back Button and Progress Bar Container */}
+      <div className="fixed top-16 left-0 right-0 z-30 bg-transparent backdrop-blur-md border-b border-white/10">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 md:px-6">
+          <GlassButton onClick={handleBack} ariaLabel="戻る" className="shrink-0">
+            <ArrowLeft className="w-5 h-5 text-white" />
+          </GlassButton>
+          <div className="flex justify-center">
+            <div className="max-w-md w-full">
+              <ProgressBar currentStep={currentStep} />
+            </div>
+          </div>
+          <div className="w-12"></div>
         </div>
       </div>
-    </Container>
+
+      <Container className="py-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="glass-card p-8">
+            {currentStep === 'shipping' && (
+              <ShippingStep
+                shippingAddress={shippingAddress}
+                onChange={setShippingAddress}
+                onNext={handleShippingNext}
+                onBack={handleBack}
+                error={error}
+              />
+            )}
+
+            {currentStep === 'payment' && (
+              <PaymentStep
+                paymentMethod={paymentMethod}
+                onChange={setPaymentMethod}
+                onNext={handlePaymentNext}
+                onBack={handleBack}
+              />
+            )}
+
+            {currentStep === 'confirm' && (
+              <ConfirmStep
+                item={item}
+                shippingAddress={shippingAddress}
+                paymentMethod={paymentMethod}
+                onConfirm={handleConfirm}
+                onBack={handleBack}
+                isLoading={isPurchasing}
+                error={error}
+              />
+            )}
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }
-
