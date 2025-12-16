@@ -33,7 +33,7 @@ export function ItemDetail({
     <div className="space-y-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Images */}
-        <div>
+        <div className="max-w-md mx-auto lg:max-w-lg w-full">
           <div className="aspect-square mb-4 rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm">
             {item.images[selectedImage] ? (
               <img
@@ -154,7 +154,7 @@ export function ItemDetail({
       {recommendedItems.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold text-white mb-6">Recommended</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {recommendedItems.map(recommendedItem => (
               <ItemCard key={recommendedItem.id} item={recommendedItem} />
             ))}

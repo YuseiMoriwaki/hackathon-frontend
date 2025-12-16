@@ -40,10 +40,10 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white/5 backdrop-blur-xl border-b border-white/10 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/home" className="text-2xl px-4 font-bold text-white hover:text-white/90 transition-colors flex items-center gap-2">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
+        <div className="flex justify-between items-center">
+          <Link href="/home" className="text-2xl font-bold text-white/60 hover:text-white transition-colors flex items-center gap-2">
               Delta
           </Link>
           
@@ -70,13 +70,17 @@ export function Header() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={handleAvatarClick}
-              className="focus:outline-none transition-transform hover:scale-105 duration-200"
+              className="relative focus:outline-none transition-transform hover:scale-105 duration-200"
               aria-label={isAuthenticated ? 'マイページメニュー' : 'ログイン'}
             >
               {isAuthenticated ? (
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold shadow-lg">
-                  {user?.name?.[0]?.toUpperCase() || 'U'}
-                </div>
+                <>
+                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold shadow-lg">
+                    {user?.name?.[0]?.toUpperCase() || 'U'}
+                  </div>
+                  {/* Notification badge */}
+                  <span className="absolute -top-1 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                </>
               ) : (
                 <UserCircle className="w-10 h-10 text-white/70 hover:text-white transition-colors" />
               )}

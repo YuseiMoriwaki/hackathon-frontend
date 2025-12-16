@@ -6,4 +6,6 @@ export { Modal } from './Modal';
 export { LoadingSpinner } from './LoadingSpinner';
 export { StatusBadge } from './StatusBadge';
 export { Alert } from './Alert';
+export { SearchBar } from './SearchBar';
+export { GlassButton } from './GlassButton';
 

@@ -8,31 +8,28 @@ import { ITEM_CATEGORIES } from '../constants';
 interface SearchFiltersProps {
   onFilterChange: (filters: ItemFilters) => void;
   initialFilters?: ItemFilters;
+  currentSearch?: string;
 }
 
-export function SearchFilters({ onFilterChange, initialFilters }: SearchFiltersProps) {
+export function SearchFilters({ onFilterChange, initialFilters, currentSearch }: SearchFiltersProps) {
   const [filters, setFilters] = useState<ItemFilters>(initialFilters || {});
 
   const handleApply = () => {
-    onFilterChange(filters);
+    // Include current search term in filters
+    onFilterChange({
+      ...filters,
+      search: currentSearch,
+    });
   };
 
   const handleReset = () => {
     setFilters({});
-    onFilterChange({});
+    onFilterChange({ search: currentSearch });
   };
 
   return (
-    <div className="glass-card p-6 space-y-4">
+    <div className="glass-card p-6 space-y-4 animate-fade-in">
       <h3 className="font-semibold text-white">絞り込み</h3>
-
-      <Input
-        type="text"
-        label="キーワード検索"
-        value={filters.search || ''}
-        onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-        placeholder="商品名で検索"
-      />
 
       <div>
         <label className="block text-sm font-medium text-white mb-2">
@@ -64,7 +61,7 @@ export function SearchFilters({ onFilterChange, initialFilters }: SearchFiltersP
             ...prev, 
             minPrice: e.target.value ? Number(e.target.value) : undefined 
           }))}
-          placeholder="0"
+          placeholder="¥0"
           min={0}
         />
         <Input
@@ -75,7 +72,7 @@ export function SearchFilters({ onFilterChange, initialFilters }: SearchFiltersP
             ...prev, 
             maxPrice: e.target.value ? Number(e.target.value) : undefined 
           }))}
-          placeholder="100000"
+          placeholder="¥100,000"
           min={0}
         />
       </div>

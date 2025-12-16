@@ -21,8 +21,12 @@ body {
 /* Glassmorphism Design System */
 @layer components {
   .glass-card {
-    @apply bg-white/5 border border-white/10 rounded-xl backdrop-blur-lg;
+    @apply bg-black/60 backdrop-blur-sm border border-black/10 rounded-2xl;
     box-shadow: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .rounded-4xl {
+    border-radius: 2rem;
   }
 
   .glass-card-hover:hover {
@@ -30,17 +34,17 @@ body {
   }
 
   .glass-card-special {
-    @apply bg-white/4 backdrop-blur-sm rounded-[20px];
+    @apply bg-white/4 backdrop-blur-sm border border-black/10 rounded-[20px];
     box-shadow: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
   }
 
   .glass-button {
-    @apply bg-white/10 border border-white/10 hover:bg-white/20 rounded-3xl;
+    @apply bg-white/4 backdrop-blur-sm border border-black/10 hover:bg-white/10 rounded-3xl;
     @apply transition-all duration-300 hover:scale-[1.01];
   }
 
   .glass-input {
-    @apply bg-white/5 border border-white/10 text-white placeholder:text-white/50;
+    @apply bg-white/4 backdrop-blur-sm border border-black/10 text-white placeholder:text-white/50;
     @apply focus:border-white/20 rounded-xl outline-none;
     @apply transition-all duration-300;
   }

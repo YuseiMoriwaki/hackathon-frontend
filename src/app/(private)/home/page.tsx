@@ -2,46 +2,76 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, ChevronUp, Search } from 'lucide-react';
-import { Header, Container } from '@/components/layouts';
-import { Card, Button, LoadingSpinner } from '@/components/ui';
+import { SlidersHorizontal } from 'lucide-react';
+import { Header, Container, BottomNav } from '@/components/layouts';
+import { Button, LoadingSpinner, SearchBar } from '@/components/ui';
 import { useAuth } from '@/features/auth';
 import { useItems, ItemCard, SearchFilters } from '@/features/items';
 import type { ItemFilters } from '@/features/items/types';
 
 export default function HomePage() {
   const { user } = useAuth();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [filters, setFilters] = useState<ItemFilters>({});
+  const [searchValue, setSearchValue] = useState('');
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const { items, isLoading } = useItems(filters);
+
+  const handleSearch = () => {
+    setFilters(prev => ({ ...prev, search: searchValue }));
+  };
+
+  const handleFilterChange = (newFilters: ItemFilters) => {
+    setFilters(newFilters);
+    setIsFiltersOpen(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
-        <Container className="py-8">
-          {/* Collapsible Search Section */}
-          <div className="mb-8">
-            <button
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="glass-button px-6 py-3 flex items-center gap-3 w-full md:w-auto justify-between md:justify-start"
-            >
-              <Search className="w-5 h-5" />
-              <span className="font-medium">検索フィルター</span>
-              {isSearchOpen ? (
-                <ChevronUp className="w-5 h-5 ml-2" />
-              ) : (
-                <ChevronDown className="w-5 h-5 ml-2" />
-              )}
-            </button>
-
-            {isSearchOpen && (
-              <div className="mt-4 animate-fade-in">
-                <SearchFilters filters={filters} onFilterChange={setFilters} />
-              </div>
-            )}
+      
+      {/* Fixed Search Bar */}
+      <div className="fixed top-[64px] left-0 right-0 z-30 bg-transparent px-4 md:px-6 py-3">
+        <div className="max-w-7xl mx-auto flex items-center gap-3">
+          <SearchBar 
+            value={searchValue}
+            onChange={setSearchValue}
+            onSearch={handleSearch}
+            placeholder="商品名で検索..."
+            className="flex-1"
+          />
+          <button
+            onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+            className={`
+              bg-white/4 backdrop-blur-sm 
+              border border-black/10 
+              px-4 py-3 rounded-full
+              flex items-center gap-2
+              transition-all duration-300
+              shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.12)]
+              hover:shadow-[0_12px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)]
+              hover:bg-white/10
+              ${isFiltersOpen ? 'bg-white/10' : ''}
+            `}
+          >
+            <SlidersHorizontal className="w-5 h-5 text-white" />
+            <span className="text-white hidden sm:inline">絞り込み</span>
+          </button>
+        </div>
+        
+        {/* Collapsible Filters */}
+        {isFiltersOpen && (
+          <div className="max-w-7xl mx-auto mt-3">
+            <SearchFilters
+              onFilterChange={handleFilterChange}
+              initialFilters={filters}
+              currentSearch={searchValue}
+            />
           </div>
+        )}
+      </div>
 
+      <main className="flex-1 pt-36 pb-24">
+        <Container className="py-8">
           {/* Items Grid */}
           <div>
             {isLoading ? (
@@ -70,6 +100,8 @@ export default function HomePage() {
           </div>
         </Container>
       </main>
+      
+      <BottomNav />
     </div>
   );
 }

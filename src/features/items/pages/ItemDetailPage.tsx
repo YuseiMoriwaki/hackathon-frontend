@@ -59,14 +59,6 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
 
   return (
     <Container className="py-8">
-      <Button
-        onClick={() => router.back()}
-        variant="secondary"
-        className="mb-6"
-      >
-        ← 戻る
-      </Button>
-
       <ItemDetail
         item={item}
         onPurchaseClick={onPurchaseClick}
