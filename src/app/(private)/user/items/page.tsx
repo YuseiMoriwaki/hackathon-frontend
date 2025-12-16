@@ -4,7 +4,7 @@ import { Header } from '@/components/layouts';
 import { UserListingsPage } from '@/features/user';
 import { useAuth } from '@/features/auth';
 
-export default function ListingsPage() {
+export default function UserItemsPage() {
   const { user } = useAuth();
 
   if (!user) return null;

@@ -1,4 +1,4 @@
-import type { Item, ItemFormData, ItemFilters } from '../types';
+import type { Item, ItemFormData, ItemFilters, ItemCategory } from '../types';
 
 // Mock data
 let mockItems: Item[] = [
@@ -23,8 +23,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/10b981/white?text=Earphone'],
     category: 'electronics',
     status: 'available',
-    sellerId: '1',
-    sellerName: 'テストユーザー',
+    sellerId: '2',
+    sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-12').toISOString(),
     updatedAt: new Date('2024-12-12').toISOString(),
   },
@@ -62,8 +62,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/1e3a8a/white?text=Jacket'],
     category: 'fashion',
     status: 'available',
-    sellerId: '2',
-    sellerName: 'ファッション倉庫',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-13').toISOString(),
     updatedAt: new Date('2024-12-13').toISOString(),
   },
@@ -88,8 +88,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/16a34a/white?text=Yoga+Mat'],
     category: 'sports',
     status: 'available',
-    sellerId: '3',
-    sellerName: 'スポーツショップ',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-11').toISOString(),
     updatedAt: new Date('2024-12-11').toISOString(),
   },
@@ -101,8 +101,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/dc2626/white?text=LEGO'],
     category: 'toys',
     status: 'sold',
-    sellerId: '1',
-    sellerName: 'おもちゃ屋さん',
+    sellerId: '3',
+    sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-09').toISOString(),
     updatedAt: new Date('2024-12-09').toISOString(),
   },
@@ -114,8 +114,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/ca8a04/white?text=Book'],
     category: 'books',
     status: 'available',
-    sellerId: '2',
-    sellerName: '本屋さん',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-14').toISOString(),
     updatedAt: new Date('2024-12-14').toISOString(),
   },
@@ -128,7 +128,7 @@ let mockItems: Item[] = [
     category: 'fashion',
     status: 'available',
     sellerId: '1',
-    sellerName: 'シューズコレクション',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-15').toISOString(),
     updatedAt: new Date('2024-12-15').toISOString(),
   },
@@ -153,8 +153,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/15803d/white?text=Plant'],
     category: 'home',
     status: 'available',
-    sellerId: '3',
-    sellerName: 'グリーンショップ',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-12').toISOString(),
     updatedAt: new Date('2024-12-12').toISOString(),
   },
@@ -179,8 +179,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/0284c7/white?text=Drone'],
     category: 'electronics',
     status: 'available',
-    sellerId: '3',
-    sellerName: 'カメラ専門店',
+    sellerId: '2',
+    sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-15').toISOString(),
     updatedAt: new Date('2024-12-15').toISOString(),
   },
@@ -193,7 +193,7 @@ let mockItems: Item[] = [
     category: 'fashion',
     status: 'sold',
     sellerId: '1',
-    sellerName: 'レディースファッション',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-10').toISOString(),
     updatedAt: new Date('2024-12-10').toISOString(),
   },
@@ -232,7 +232,7 @@ let mockItems: Item[] = [
     category: 'books',
     status: 'available',
     sellerId: '1',
-    sellerName: '料理本専門店',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-12').toISOString(),
     updatedAt: new Date('2024-12-12').toISOString(),
   },
@@ -244,8 +244,8 @@ let mockItems: Item[] = [
     images: ['https://placehold.co/400x400/0369a1/white?text=Watch'],
     category: 'electronics',
     status: 'available',
-    sellerId: '2',
-    sellerName: 'アップル製品専門店',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-15').toISOString(),
     updatedAt: new Date('2024-12-15').toISOString(),
   },
@@ -258,9 +258,139 @@ let mockItems: Item[] = [
     category: 'toys',
     status: 'available',
     sellerId: '3',
-    sellerName: '楽器店',
+    sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-14').toISOString(),
     updatedAt: new Date('2024-12-14').toISOString(),
+  },
+  {
+    id: '21',
+    title: 'レザートートバッグ',
+    description: '本革のトートバッグ。ビジネスにも普段使いにも。\n\n上質な本革を使用したトートバッグ。使い込むほどに味が出る経年変化を楽しめます。A4サイズの書類やノートPCも楽々収納できる大きさです。\n\n【仕様】\n・素材：本革（牛革）\n・サイズ：幅40cm × 高さ32cm × マチ12cm\n・重量：約900g\n・内ポケット2つ、外ポケット1つ\n\nビジネスシーンはもちろん、カジュアルな装いにも合わせやすいシンプルなデザイン。使用期間3ヶ月、革の状態良好です。',
+    price: 24000,
+    images: ['https://placehold.co/400x400/92400e/white?text=Tote+Bag'],
+    category: 'fashion',
+    status: 'available',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '22',
+    title: 'ビジネスシューズ 革靴 25.5cm',
+    description: 'フォーマルな革靴。冠婚葬祭やビジネスに。\n\n本革使用の高品質ビジネスシューズ。内羽根式のストレートチップで、最もフォーマルなデザインです。\n\n【詳細】\n・サイズ：25.5cm\n・素材：本革（アッパー）\n・ソール：合成ゴム\n・カラー：ブラック\n\nクッション性のあるインソールで長時間の着用も快適。靴磨きセット付き。着用回数5回程度、ソールの減りもわずかで美品です。',
+    price: 8500,
+    images: ['https://placehold.co/400x400/1c1917/white?text=Shoes'],
+    category: 'fashion',
+    status: 'available',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '23',
+    title: '自己啓発本 思考は現実化する',
+    description: 'ナポレオン・ヒル著の名著。成功哲学の古典。\n\n世界中で8000万部以上売れた成功哲学の決定版。アンドリュー・カーネギーなど、成功者500名以上への取材をもとに、成功の秘訣を体系化しています。\n\n【内容】\n・明確な目標設定の重要性\n・願望を実現する6つのステップ\n・マスターマインドの活用法\n・潜在意識の力の使い方\n\n単なる精神論ではなく、具体的な行動指針が満載。人生を変えたい方必読の一冊です。書き込みなし、状態良好。',
+    price: 1800,
+    images: ['https://placehold.co/400x400/d97706/white?text=Success+Book'],
+    category: 'books',
+    status: 'available',
+    sellerId: '1',
+    sellerName: 'テストユーザー',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '24',
+    title: 'ワイヤレス充電器 Anker',
+    description: '高速ワイヤレス充電器。iPhone/Android対応。\n\nAnkerの人気ワイヤレス充電器。最大15Wの高速充電に対応し、スマートフォンを置くだけで充電できます。\n\n【特徴】\n・最大15W出力（デバイスにより異なる）\n・iPhone、Android両対応\n・ケースを付けたまま充電可能（厚さ5mm以下）\n・過充電防止、温度管理機能搭載\n・滑り止めラバー付き\n\nケーブルの抜き差し不要で、デスクに置いておくだけで便利。USB-Cケーブル、ACアダプター付き。ほぼ未使用品です。',
+    price: 2800,
+    images: ['https://placehold.co/400x400/0c4a6e/white?text=Charger'],
+    category: 'electronics',
+    status: 'available',
+    sellerId: '2',
+    sellerName: 'テックガジェット',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '25',
+    title: 'ゲーミングヘッドセット SteelSeries',
+    description: 'プロ仕様のゲーミングヘッドセット。7.1サラウンド対応。\n\nSteelSeriesの高性能ゲーミングヘッドセット。クリアな音質と快適な装着感で長時間のゲームプレイも快適です。\n\n【スペック】\n・7.1バーチャルサラウンドサウンド\n・ノイズキャンセリングマイク\n・40mm高磁力ネオジムドライバー\n・USB接続（PC/PS4/PS5対応）\n・イヤーパッド：低反発クッション\n\nFPS、MOBA、MMOなど、あらゆるゲームジャンルに最適。Discord、Skypeなどの通話にも。使用期間4ヶ月、動作良好です。',
+    price: 9500,
+    images: ['https://placehold.co/400x400/5b21b6/white?text=Headset'],
+    category: 'electronics',
+    status: 'available',
+    sellerId: '2',
+    sellerName: 'テックガジェット',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '26',
+    title: 'アロマディフューザー 超音波式',
+    description: '静音設計のアロマディフューザー。LEDライト付き。\n\n超音波式で静かに香りを拡散するアロマディフューザー。寝室やリビング、オフィスでの使用に最適です。\n\n【機能】\n・タンク容量：300ml（最大10時間連続使用）\n・タイマー機能：1時間/3時間/6時間/連続\n・7色LEDライト（固定・グラデーション切替可）\n・自動停止機能（水がなくなると自動停止）\n・静音設計（35dB以下）\n\nリラックス効果抜群。エッセンシャルオイル2本（ラベンダー、ユーカリ）付き。使用回数少なめ、美品です。',
+    price: 3200,
+    images: ['https://placehold.co/400x400/065f46/white?text=Diffuser'],
+    category: 'home',
+    status: 'available',
+    sellerId: '3',
+    sellerName: 'ホビーコレクター',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '27',
+    title: 'ジグソーパズル 2000ピース',
+    description: '美しい風景画のジグソーパズル。完成サイズ大型。\n\n2000ピースの大型ジグソーパズル。ヨーロッパの美しい街並みを描いた作品です。\n\n【詳細】\n・ピース数：2000ピース\n・完成サイズ：約73cm × 102cm\n・絵柄：ヨーロッパ風景\n・対象年齢：12歳以上\n\nじっくり取り組める大作パズル。完成後は額装してインテリアとしても楽しめます。全ピース揃っています、未開封品です。',
+    price: 3800,
+    images: ['https://placehold.co/400x400/be123c/white?text=Puzzle'],
+    category: 'toys',
+    status: 'available',
+    sellerId: '3',
+    sellerName: 'ホビーコレクター',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '28',
+    title: 'フィギュア ワンピース ルフィ',
+    description: '人気アニメのフィギュア。限定版。\n\n「ワンピース」の主人公ルフィのフィギュア。躍動感あふれるポージングが魅力的な限定モデルです。\n\n【商品情報】\n・高さ：約25cm\n・素材：PVC、ABS\n・可動：一部可動\n・付属品：専用台座、交換用パーツ\n\n細部まで丁寧に造形されており、ファン必見のクオリティ。箱付き、未開封品。コレクションや飾り用に最適です。',
+    price: 12000,
+    images: ['https://placehold.co/400x400/dc2626/white?text=Figure'],
+    category: 'toys',
+    status: 'available',
+    sellerId: '3',
+    sellerName: 'ホビーコレクター',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '29',
+    title: '登山リュック 40L',
+    description: '本格登山用リュック。日帰りから1泊登山まで。\n\n容量40Lの本格的な登山用リュックサック。日帰り登山から山小屋1泊の登山まで対応できるサイズです。\n\n【仕様】\n・容量：40L\n・重量：約1.2kg\n・背面長調整機能付き\n・レインカバー内蔵\n・ハイドレーション対応\n・ウエストベルト、チェストストラップ付き\n\n通気性の良い背面メッシュ、多数のポケットで小物の整理も簡単。使用回数3回、状態良好です。',
+    price: 13500,
+    images: ['https://placehold.co/400x400/166534/white?text=Backpack'],
+    category: 'sports',
+    status: 'available',
+    sellerId: '4',
+    sellerName: 'アウトドア愛好家',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
+  },
+  {
+    id: '30',
+    title: 'ミラーレスカメラ Sony α6400',
+    description: 'ソニーの人気ミラーレス一眼。高速AF、4K動画対応。\n\nSony α6400は、APS-Cセンサーを搭載したミラーレス一眼カメラ。静止画も動画も高品質に撮影できます。\n\n【スペック】\n・有効画素数：約2420万画素\n・高速AF：0.02秒\n・リアルタイム瞳AF（人物・動物対応）\n・4K動画撮影\n・180度チルト液晶（自撮り対応）\n・連写：最高11コマ/秒\n\nレンズキット（E 16-50mm F3.5-5.6）、予備バッテリー、SDカード64GB、カメラバッグ付き。使用期間1年、傷なし美品です。',
+    price: 78000,
+    images: ['https://placehold.co/400x400/1e40af/white?text=Camera'],
+    category: 'electronics',
+    status: 'available',
+    sellerId: '4',
+    sellerName: 'アウトドア愛好家',
+    createdAt: new Date('2024-12-16').toISOString(),
+    updatedAt: new Date('2024-12-16').toISOString(),
   },
 ];
 
@@ -310,14 +440,33 @@ export async function getItem(id: string): Promise<Item> {
 }
 
 export async function createItem(data: ItemFormData): Promise<Item> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
+      // Get current user from localStorage (same logic as Header)
+      let currentUser = null;
+      if (typeof window !== 'undefined') {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+          try {
+            currentUser = JSON.parse(userStr);
+          } catch (e) {
+            console.error('Failed to parse user from localStorage', e);
+          }
+        }
+      }
+
+      // Ensure user is authenticated
+      if (!currentUser) {
+        reject(new Error('ユーザー情報が見つかりません。ログインしてください。'));
+        return;
+      }
+
       const newItem: Item = {
         ...data,
         id: Date.now().toString(),
         status: 'available',
-        sellerId: '1', // Mock user ID
-        sellerName: 'テストユーザー',
+        sellerId: currentUser.id, // Use current user's ID
+        sellerName: currentUser.name, // Use current user's name
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };

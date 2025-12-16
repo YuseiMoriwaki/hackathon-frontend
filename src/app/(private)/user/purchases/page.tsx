@@ -15,7 +15,7 @@ export default function PurchasesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 pt-14 pb-24">
         <Container className="py-8">
           <h1 className="text-3xl font-bold text-white mb-8">購入履歴</h1>
 
