@@ -1,56 +1,98 @@
 import type { Purchase, PurchaseRequest } from '../types';
-import { getItem, updateItem } from '@/features/items/api/itemsApi';
-
-// Mock purchases
-let mockPurchases: Purchase[] = [];
+import { get, post } from '@/lib/api-client';
 
 export async function createPurchase(request: PurchaseRequest): Promise<Purchase> {
-  // アイテム情報を取得
-  const item = await getItem(request.itemId);
-  
-  // アイテムのステータスを sold に更新
-  await updateItem(request.itemId, { status: 'sold' as any });
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const newPurchase: Purchase = {
-        id: Date.now().toString(),
-        itemId: request.itemId,
-        itemTitle: item.title,
-        itemPrice: item.price,
-        itemImage: item.images[0] || 'https://placehold.co/400',
-        buyerId: '1', // Current user
-        sellerId: item.sellerId,
-        status: 'completed',
-        createdAt: new Date().toISOString(),
-        completedAt: new Date().toISOString(),
-      };
-      
-      mockPurchases = [newPurchase, ...mockPurchases];
-      resolve(newPurchase);
-    }, 1000);
+  const response = await post<{
+    id: string;
+    itemId: string;
+    itemTitle: string;
+    itemPrice: number;
+    itemImage: string;
+    buyerId: string;
+    sellerId: string;
+    status: string;
+    createdAt: string;
+    completedAt?: string;
+  }>('/purchases', {
+    item_id: parseInt(request.itemId, 10),
+    payment_method: request.paymentMethod,
+    shipping_address: {
+      postal_code: request.shippingAddress.postalCode,
+      prefecture: request.shippingAddress.prefecture,
+      city: request.shippingAddress.city,
+      address: request.shippingAddress.address,
+      building: request.shippingAddress.building,
+      name: request.shippingAddress.name,
+      phone: request.shippingAddress.phone,
+    },
   });
+
+  return {
+    id: response.id,
+    itemId: response.itemId,
+    itemTitle: response.itemTitle,
+    itemPrice: response.itemPrice,
+    itemImage: response.itemImage,
+    buyerId: response.buyerId,
+    sellerId: response.sellerId,
+    status: response.status as 'pending' | 'completed' | 'cancelled',
+    createdAt: response.createdAt,
+    completedAt: response.completedAt,
+  };
 }
 
 export async function getPurchaseHistory(userId: string): Promise<Purchase[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const userPurchases = mockPurchases.filter(p => p.buyerId === userId);
-      resolve(userPurchases);
-    }, 500);
-  });
+  const purchases = await get<Array<{
+    id: string;
+    itemId: string;
+    itemTitle: string;
+    itemPrice: number;
+    itemImage: string;
+    buyerId: string;
+    sellerId: string;
+    status: string;
+    createdAt: string;
+    completedAt?: string;
+  }>>(`/purchases/users/${userId}`);
+
+  return purchases.map(p => ({
+    id: p.id,
+    itemId: p.itemId,
+    itemTitle: p.itemTitle,
+    itemPrice: p.itemPrice,
+    itemImage: p.itemImage,
+    buyerId: p.buyerId,
+    sellerId: p.sellerId,
+    status: p.status as 'pending' | 'completed' | 'cancelled',
+    createdAt: p.createdAt,
+    completedAt: p.completedAt,
+  }));
 }
 
 export async function getPurchase(id: string): Promise<Purchase> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const purchase = mockPurchases.find(p => p.id === id);
-      if (purchase) {
-        resolve(purchase);
-      } else {
-        reject(new Error('購入情報が見つかりません'));
-      }
-    }, 300);
-  });
-}
+  const response = await get<{
+    id: string;
+    itemId: string;
+    itemTitle: string;
+    itemPrice: number;
+    itemImage: string;
+    buyerId: string;
+    sellerId: string;
+    status: string;
+    createdAt: string;
+    completedAt?: string;
+  }>(`/purchases/${id}`);
 
+  return {
+    id: response.id,
+    itemId: response.itemId,
+    itemTitle: response.itemTitle,
+    itemPrice: response.itemPrice,
+    itemImage: response.itemImage,
+    buyerId: response.buyerId,
+    sellerId: response.sellerId,
+    status: response.status as 'pending' | 'completed' | 'cancelled',
+    createdAt: response.createdAt,
+    completedAt: response.completedAt,
+  };
+}

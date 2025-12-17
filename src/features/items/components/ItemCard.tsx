@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Heart } from 'lucide-react';
 import { Card } from '@/components/ui';
 import type { Item } from '../types';
@@ -19,7 +20,7 @@ export function ItemCard({ item }: ItemCardProps) {
   const { removeFavorite } = useRemoveFavorite(user?.id);
   
   const isFavorited = favorites.includes(item.id);
-  const isAvailable = item.status === 'available';
+  const isAvailable = item.status === 'active' || item.status === 'available';
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -60,9 +61,11 @@ export function ItemCard({ item }: ItemCardProps) {
 
         <div className="relative aspect-square mb-3 rounded-lg overflow-hidden">
           {item.images[0] ? (
-            <img
+            <Image
               src={item.images[0]}
               alt={item.title}
+              width={400}
+              height={400}
               className="w-full h-full object-cover"
             />
           ) : (
@@ -84,7 +87,7 @@ export function ItemCard({ item }: ItemCardProps) {
         </h3>
         
         <p className="text-2xl font-bold text-blue-300 mb-2">
-          ¥{item.price.toLocaleString()}
+          ¥{item.price}
         </p>
         
         <p className="text-sm text-white/50">

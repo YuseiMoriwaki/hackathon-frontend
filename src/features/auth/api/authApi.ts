@@ -1,108 +1,78 @@
 import type { User, LoginCredentials, RegisterData, AuthResponse } from '../types';
-
-// Mock user data
-const mockUsers: User[] = [
-  {
-    id: '1',
-    email: 'test@example.com',
-    name: 'テストユーザー',
-    avatar: '',
-    createdAt: new Date().toISOString(),
-  },
-];
-
-// Mock current user (simulating logged in state)
-let currentUser: User | null = null;
+import { get, post } from '@/lib/api-client';
 
 export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // Simple mock authentication
-      if (credentials.email === 'test@example.com' && credentials.password === 'password') {
-        const user = mockUsers[0];
-        currentUser = user;
-        
-        // Store in localStorage for persistence
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('auth_token', 'mock-token-123');
-          localStorage.setItem('user', JSON.stringify(user));
-        }
-        
-        resolve({ user, token: 'mock-token-123' });
-      } else {
-        reject(new Error('メールアドレスまたはパスワードが正しくありません'));
-      }
-    }, 800);
+  const response = await post<AuthResponse>('/auth/login', {
+    email: credentials.email,
+    // Note: Backend dummy implementation doesn't require password
   });
+
+  // Store token and user in localStorage
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('auth_token', response.token);
+    localStorage.setItem('user', JSON.stringify(response.user));
+  }
+
+  return response;
 }
 
 export async function register(data: RegisterData): Promise<AuthResponse> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const newUser: User = {
-        id: Date.now().toString(),
-        email: data.email,
-        name: data.name,
-        createdAt: new Date().toISOString(),
-      };
-      
-      mockUsers.push(newUser);
-      currentUser = newUser;
-      
-      // Store in localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('auth_token', 'mock-token-' + newUser.id);
-        localStorage.setItem('user', JSON.stringify(newUser));
-      }
-      
-      resolve({ user: newUser, token: 'mock-token-' + newUser.id });
-    }, 800);
+  const response = await post<AuthResponse>('/auth/register', {
+    email: data.email,
+    name: data.name,
+    // Note: Backend dummy implementation doesn't require password
   });
+
+  // Store token and user in localStorage
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('auth_token', response.token);
+    localStorage.setItem('user', JSON.stringify(response.user));
+  }
+
+  return response;
 }
 
 export async function logout(): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      currentUser = null;
-      
-      // Clear localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user');
-      }
-      
-      resolve();
-    }, 300);
-  });
+  try {
+    await post('/auth/logout');
+  } finally {
+    // Clear localStorage regardless of API response
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
+    }
+  }
 }
 
 export async function getCurrentUser(): Promise<User | null> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // Try to restore from localStorage
-      if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('auth_token');
-        const userStr = localStorage.getItem('user');
-        
-        if (token && userStr) {
-          try {
-            const user = JSON.parse(userStr);
-            currentUser = user;
-            resolve(user);
-            return;
-          } catch (e) {
-            // Invalid data
-          }
-        }
-      }
-      
-      resolve(currentUser);
-    }, 300);
-  });
+  // Try to restore from localStorage first
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const user = await get<User>('/auth/me');
+      // Update localStorage with fresh data
+      localStorage.setItem('user', JSON.stringify(user));
+      return user;
+    } catch {
+      // Token might be invalid, clear storage
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('user');
+      return null;
+    }
+  }
+
+  return null;
 }
 
 export async function checkAuth(): Promise<boolean> {
-  const user = await getCurrentUser();
-  return user !== null;
+  try {
+    await get('/auth/check');
+    return true;
+  } catch {
+    return false;
+  }
 }
-

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Button, Input, Textarea } from '@/components/ui';
-import type { ItemFormData, Item } from '../types';
+import type { ItemFormData, Item, ItemCategory } from '../types';
 import { ITEM_CATEGORIES } from '../constants';
 
 interface ItemFormProps {
@@ -101,7 +102,7 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
         </label>
         <select
           value={formData.category}
-          onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as any }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as ItemCategory }))}
           className="glass-input w-full px-4 py-2.5"
           required
         >
@@ -122,7 +123,7 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
           <div className="grid grid-cols-3 gap-3 mb-3">
             {formData.images.map((img, index) => (
               <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-white/10">
-                <img src={img} alt="" className="w-full h-full object-cover" />
+                <Image src={img} alt="" width={100} height={100} className="w-full h-full object-cover" />
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}

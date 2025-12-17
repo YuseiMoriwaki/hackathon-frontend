@@ -5,12 +5,10 @@ import Link from 'next/link';
 import { SlidersHorizontal } from 'lucide-react';
 import { Header, Container, BottomNav } from '@/components/layouts';
 import { Button, LoadingSpinner, SearchBar } from '@/components/ui';
-import { useAuth } from '@/features/auth';
 import { useItems, ItemCard, SearchFilters } from '@/features/items';
 import type { ItemFilters } from '@/features/items/types';
 
 export default function HomePage() {
-  const { user } = useAuth();
   const [filters, setFilters] = useState<ItemFilters>({});
   const [searchValue, setSearchValue] = useState('');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button, Input } from '@/components/ui';
-import type { ItemFilters } from '../types';
+import type { ItemFilters, ItemCategory } from '../types';
 import { ITEM_CATEGORIES } from '../constants';
 
 interface SearchFiltersProps {
@@ -39,7 +39,7 @@ export function SearchFilters({ onFilterChange, initialFilters, currentSearch }:
           value={filters.category || ''}
           onChange={(e) => setFilters(prev => ({ 
             ...prev, 
-            category: e.target.value ? e.target.value as any : undefined 
+            category: e.target.value ? e.target.value as ItemCategory : undefined 
           }))}
           className="glass-input w-full px-4 py-2.5"
         >

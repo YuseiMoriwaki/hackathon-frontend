@@ -1,4 +1,4 @@
-import type { ItemCategory } from '../types';
+import type { ItemCategory, ItemStatus } from '../types';
 
 export const ITEM_CATEGORIES: { value: ItemCategory; label: string }[] = [
   { value: 'fashion', label: 'ファッション' },
@@ -9,9 +9,11 @@ export const ITEM_CATEGORIES: { value: ItemCategory; label: string }[] = [
   { value: 'other', label: 'その他' },
 ];
 
-export const STATUS_LABELS = {
+export const STATUS_LABELS: Record<ItemStatus, string> = {
+  active: '販売中',
   available: '販売中',
   sold: '売却済み',
+  removed: '削除済み',
   reserved: '予約中',
 };
 

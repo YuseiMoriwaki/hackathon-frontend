@@ -10,7 +10,7 @@ import type { ItemFilters } from '../types';
 import { SlidersHorizontal } from 'lucide-react';
 
 export function ItemListPage() {
-  const [filters, setFilters] = useState<ItemFilters>({ status: 'available' });
+  const [filters, setFilters] = useState<ItemFilters>({ status: 'active' });
   const [searchValue, setSearchValue] = useState('');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const { items, isLoading, isError } = useItems(filters);

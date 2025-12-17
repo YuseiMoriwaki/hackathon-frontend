@@ -1,4 +1,5 @@
 import type { Item, ItemFormData, ItemFilters, ItemCategory } from '../types';
+import { get, put, del } from '@/lib/api-client';
 
 // Mock data
 let mockItems: Item[] = [
@@ -9,7 +10,7 @@ let mockItems: Item[] = [
     price: 15000,
     images: ['https://placehold.co/400x400/3b82f6/white?text=Bag'],
     category: 'fashion',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-10').toISOString(),
@@ -22,7 +23,7 @@ let mockItems: Item[] = [
     price: 8000,
     images: ['https://placehold.co/400x400/10b981/white?text=Earphone'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-12').toISOString(),
@@ -48,7 +49,7 @@ let mockItems: Item[] = [
     price: 12800,
     images: ['https://placehold.co/400x400/6366f1/white?text=Keyboard'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-14').toISOString(),
@@ -61,7 +62,7 @@ let mockItems: Item[] = [
     price: 6500,
     images: ['https://placehold.co/400x400/1e3a8a/white?text=Jacket'],
     category: 'fashion',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-13').toISOString(),
@@ -74,7 +75,7 @@ let mockItems: Item[] = [
     price: 45000,
     images: ['https://placehold.co/400x400/78350f/white?text=Coffee'],
     category: 'home',
-    status: 'available',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ホームセレクト',
     createdAt: new Date('2024-12-15').toISOString(),
@@ -87,7 +88,7 @@ let mockItems: Item[] = [
     price: 3500,
     images: ['https://placehold.co/400x400/16a34a/white?text=Yoga+Mat'],
     category: 'sports',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-11').toISOString(),
@@ -99,7 +100,7 @@ let mockItems: Item[] = [
     description: '人気のレゴクリエイターシリーズ。ピース数800以上。\n\nレゴクリエイターの大型セット。800ピース以上のパーツで、3通りの組み立て方が楽しめる3-in-1モデルです。\n\n創造力を育む知育玩具として最適。お子様から大人まで楽しめます。説明書完備、全パーツ揃っています。\n\n※すでに売却済みの商品です。',
     price: 8900,
     images: ['https://placehold.co/400x400/dc2626/white?text=LEGO'],
-    category: 'toys',
+    category: 'other',
     status: 'sold',
     sellerId: '3',
     sellerName: 'ホビーコレクター',
@@ -113,7 +114,7 @@ let mockItems: Item[] = [
     price: 1500,
     images: ['https://placehold.co/400x400/ca8a04/white?text=Book'],
     category: 'books',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-14').toISOString(),
@@ -126,7 +127,7 @@ let mockItems: Item[] = [
     price: 9800,
     images: ['https://placehold.co/400x400/0891b2/white?text=Sneakers'],
     category: 'fashion',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-15').toISOString(),
@@ -139,7 +140,7 @@ let mockItems: Item[] = [
     price: 7800,
     images: ['https://placehold.co/400x400/7c3aed/white?text=Mouse'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'ゲーミングギア',
     createdAt: new Date('2024-12-13').toISOString(),
@@ -152,7 +153,7 @@ let mockItems: Item[] = [
     price: 4200,
     images: ['https://placehold.co/400x400/15803d/white?text=Plant'],
     category: 'home',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-12').toISOString(),
@@ -165,7 +166,7 @@ let mockItems: Item[] = [
     price: 11000,
     images: ['https://placehold.co/400x400/ea580c/white?text=Racket'],
     category: 'sports',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テニスプロショップ',
     createdAt: new Date('2024-12-14').toISOString(),
@@ -178,7 +179,7 @@ let mockItems: Item[] = [
     price: 58000,
     images: ['https://placehold.co/400x400/0284c7/white?text=Drone'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-15').toISOString(),
@@ -204,7 +205,7 @@ let mockItems: Item[] = [
     price: 15500,
     images: ['https://placehold.co/400x400/4338ca/white?text=Dictionary'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: '電子機器ストア',
     createdAt: new Date('2024-12-11').toISOString(),
@@ -216,8 +217,8 @@ let mockItems: Item[] = [
     description: '人気の戦略ボードゲーム。3〜4人用。\n\n世界中で愛されている戦略ボードゲーム「カタンの開拓者たち」。資源を集めて、道や街を作り、カタン島を開拓していくゲームです。\n\n対象年齢：8歳以上\nプレイ人数：3〜4人\nプレイ時間：約60〜90分\n\n運と戦略のバランスが絶妙で、何度でも楽しめます。家族や友人とのゲームナイトに最適。説明書付き、全パーツ揃っています。箱に若干の使用感がありますが、内容物は美品です。',
     price: 3200,
     images: ['https://placehold.co/400x400/b91c1c/white?text=Board+Game'],
-    category: 'toys',
-    status: 'available',
+    category: 'other',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ゲームショップ',
     createdAt: new Date('2024-12-13').toISOString(),
@@ -230,7 +231,7 @@ let mockItems: Item[] = [
     price: 2800,
     images: ['https://placehold.co/400x400/c2410c/white?text=Cookbook'],
     category: 'books',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-12').toISOString(),
@@ -243,7 +244,7 @@ let mockItems: Item[] = [
     price: 42000,
     images: ['https://placehold.co/400x400/0369a1/white?text=Watch'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-15').toISOString(),
@@ -255,8 +256,8 @@ let mockItems: Item[] = [
     description: 'ヤマハのアコースティックギター。初心者にもおすすめ。\n\nヤマハの定番アコースティックギター。初心者でも弾きやすい設計で、これからギターを始める方に最適です。\n\n【スペック】\n・トップ：スプルース\n・サイド/バック：メランティ\n・ネック：ナトー\n・指板：ローズウッド\n・弦長：634mm\n\n温かみのある音色が特徴で、弾き語りにぴったり。ソフトケース、チューナー、カポタスト、予備弦、ピックセット付き。使用期間1年、目立った傷なし。',
     price: 18500,
     images: ['https://placehold.co/400x400/a16207/white?text=Guitar'],
-    category: 'toys',
-    status: 'available',
+    category: 'other',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-14').toISOString(),
@@ -269,7 +270,7 @@ let mockItems: Item[] = [
     price: 24000,
     images: ['https://placehold.co/400x400/92400e/white?text=Tote+Bag'],
     category: 'fashion',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -282,7 +283,7 @@ let mockItems: Item[] = [
     price: 8500,
     images: ['https://placehold.co/400x400/1c1917/white?text=Shoes'],
     category: 'fashion',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -295,7 +296,7 @@ let mockItems: Item[] = [
     price: 1800,
     images: ['https://placehold.co/400x400/d97706/white?text=Success+Book'],
     category: 'books',
-    status: 'available',
+    status: 'active',
     sellerId: '1',
     sellerName: 'テストユーザー',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -308,7 +309,7 @@ let mockItems: Item[] = [
     price: 2800,
     images: ['https://placehold.co/400x400/0c4a6e/white?text=Charger'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -321,7 +322,7 @@ let mockItems: Item[] = [
     price: 9500,
     images: ['https://placehold.co/400x400/5b21b6/white?text=Headset'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '2',
     sellerName: 'テックガジェット',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -334,7 +335,7 @@ let mockItems: Item[] = [
     price: 3200,
     images: ['https://placehold.co/400x400/065f46/white?text=Diffuser'],
     category: 'home',
-    status: 'available',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -346,8 +347,8 @@ let mockItems: Item[] = [
     description: '美しい風景画のジグソーパズル。完成サイズ大型。\n\n2000ピースの大型ジグソーパズル。ヨーロッパの美しい街並みを描いた作品です。\n\n【詳細】\n・ピース数：2000ピース\n・完成サイズ：約73cm × 102cm\n・絵柄：ヨーロッパ風景\n・対象年齢：12歳以上\n\nじっくり取り組める大作パズル。完成後は額装してインテリアとしても楽しめます。全ピース揃っています、未開封品です。',
     price: 3800,
     images: ['https://placehold.co/400x400/be123c/white?text=Puzzle'],
-    category: 'toys',
-    status: 'available',
+    category: 'other',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -359,8 +360,8 @@ let mockItems: Item[] = [
     description: '人気アニメのフィギュア。限定版。\n\n「ワンピース」の主人公ルフィのフィギュア。躍動感あふれるポージングが魅力的な限定モデルです。\n\n【商品情報】\n・高さ：約25cm\n・素材：PVC、ABS\n・可動：一部可動\n・付属品：専用台座、交換用パーツ\n\n細部まで丁寧に造形されており、ファン必見のクオリティ。箱付き、未開封品。コレクションや飾り用に最適です。',
     price: 12000,
     images: ['https://placehold.co/400x400/dc2626/white?text=Figure'],
-    category: 'toys',
-    status: 'available',
+    category: 'other',
+    status: 'active',
     sellerId: '3',
     sellerName: 'ホビーコレクター',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -373,7 +374,7 @@ let mockItems: Item[] = [
     price: 13500,
     images: ['https://placehold.co/400x400/166534/white?text=Backpack'],
     category: 'sports',
-    status: 'available',
+    status: 'active',
     sellerId: '4',
     sellerName: 'アウトドア愛好家',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -386,7 +387,7 @@ let mockItems: Item[] = [
     price: 78000,
     images: ['https://placehold.co/400x400/1e40af/white?text=Camera'],
     category: 'electronics',
-    status: 'available',
+    status: 'active',
     sellerId: '4',
     sellerName: 'アウトドア愛好家',
     createdAt: new Date('2024-12-16').toISOString(),
@@ -395,48 +396,24 @@ let mockItems: Item[] = [
 ];
 
 export async function getItems(filters?: ItemFilters): Promise<Item[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      let filtered = [...mockItems];
+  const params = new URLSearchParams();
 
-      if (filters) {
-        if (filters.category) {
-          filtered = filtered.filter(item => item.category === filters.category);
-        }
-        if (filters.status) {
-          filtered = filtered.filter(item => item.status === filters.status);
-        }
-        if (filters.minPrice !== undefined) {
-          filtered = filtered.filter(item => item.price >= filters.minPrice!);
-        }
-        if (filters.maxPrice !== undefined) {
-          filtered = filtered.filter(item => item.price <= filters.maxPrice!);
-        }
-        if (filters.search) {
-          const searchLower = filters.search.toLowerCase();
-          filtered = filtered.filter(item =>
-            item.title.toLowerCase().includes(searchLower) ||
-            item.description.toLowerCase().includes(searchLower)
-          );
-        }
-      }
+  if (filters) {
+    if (filters.category) params.append('category', filters.category);
+    if (filters.status) params.append('status', filters.status);
+    if (filters.minPrice !== undefined) params.append('min_price', filters.minPrice.toString());
+    if (filters.maxPrice !== undefined) params.append('max_price', filters.maxPrice.toString());
+    if (filters.search) params.append('search', filters.search);
+  }
 
-      resolve(filtered);
-    }, 500);
-  });
+  const queryString = params.toString();
+  const endpoint = `/items${queryString ? `?${queryString}` : ''}`;
+
+  return get<Item[]>(endpoint);
 }
 
 export async function getItem(id: string): Promise<Item> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const item = mockItems.find(i => i.id === id);
-      if (item) {
-        resolve(item);
-      } else {
-        reject(new Error('商品が見つかりません'));
-      }
-    }, 300);
-  });
+  return get<Item>(`/items/${id}`);
 }
 
 export async function createItem(data: ItemFormData): Promise<Item> {
@@ -464,7 +441,7 @@ export async function createItem(data: ItemFormData): Promise<Item> {
       const newItem: Item = {
         ...data,
         id: Date.now().toString(),
-        status: 'available',
+        status: 'active',
         sellerId: currentUser.id, // Use current user's ID
         sellerName: currentUser.name, // Use current user's name
         createdAt: new Date().toISOString(),
@@ -477,54 +454,17 @@ export async function createItem(data: ItemFormData): Promise<Item> {
 }
 
 export async function updateItem(id: string, data: Partial<ItemFormData>): Promise<Item> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const index = mockItems.findIndex(i => i.id === id);
-      if (index !== -1) {
-        mockItems[index] = {
-          ...mockItems[index],
-          ...data,
-          updatedAt: new Date().toISOString(),
-        };
-        resolve(mockItems[index]);
-      } else {
-        reject(new Error('商品が見つかりません'));
-      }
-    }, 800);
-  });
+  return put<Item>(`/items/${id}`, data);
 }
 
 export async function deleteItem(id: string): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      mockItems = mockItems.filter(i => i.id !== id);
-      resolve();
-    }, 500);
-  });
+  await del(`/items/${id}`);
 }
 
 export async function getUserItems(userId: string): Promise<Item[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const userItems = mockItems.filter(item => item.sellerId === userId);
-      resolve(userItems);
-    }, 500);
-  });
+  return get<Item[]>(`/users/${userId}/items`);
 }
 
 export async function getRecommendedItems(itemId: string, category: ItemCategory, limit: number = 6): Promise<Item[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // Get items from the same category, excluding the current item and sold items
-      const recommended = mockItems
-        .filter(item => 
-          item.id !== itemId && 
-          item.category === category && 
-          item.status === 'available'
-        )
-        .slice(0, limit);
-      resolve(recommended);
-    }, 300);
-  });
+  return get<Item[]>(`/items/${itemId}/recommended?limit=${limit}`);
 }
-

@@ -131,7 +131,7 @@ export function CheckoutPage({ itemId }: CheckoutPageProps) {
     );
   }
 
-  if (item.status !== 'available') {
+  if (item.status !== 'active') {
     return (
       <Container className="py-8">
         <div className="text-center">

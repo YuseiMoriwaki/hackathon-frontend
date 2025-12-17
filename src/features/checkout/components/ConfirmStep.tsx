@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Button } from '@/components/ui';
 import type { Item } from '@/features/items';
 import type { ShippingAddress, PaymentMethod } from '../types';
@@ -43,15 +44,17 @@ export function ConfirmStep({
       <div className="glass-card p-6">
         <h3 className="text-lg font-semibold text-white mb-4">購入商品</h3>
         <div className="flex gap-4">
-          <img
+          <Image
             src={item.images[0] || 'https://placehold.co/100'}
             alt={item.title}
+            width={100}
+            height={100}
             className="w-24 h-24 object-cover rounded-lg"
           />
           <div className="flex-1">
             <h4 className="font-semibold text-white mb-2">{item.title}</h4>
             <p className="text-2xl font-bold text-blue-300">
-              ¥{item.price.toLocaleString()}
+              ¥{item.price}
             </p>
           </div>
         </div>
@@ -92,7 +95,7 @@ export function ConfirmStep({
         <div className="flex justify-between items-center">
           <span className="text-xl font-semibold text-white">合計金額</span>
           <span className="text-3xl font-bold text-blue-300">
-            ¥{item.price.toLocaleString()}
+            ¥{item.price}
           </span>
         </div>
       </div>

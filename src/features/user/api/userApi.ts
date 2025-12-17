@@ -1,44 +1,30 @@
 import type { UserProfile, UserProfileUpdate } from '../types';
-
-// Mock user data
-let mockUser: UserProfile = {
-  id: '1',
-  email: 'test@example.com',
-  name: 'テストユーザー',
-  bio: 'よろしくお願いします！',
-  location: '東京都',
-  createdAt: new Date().toISOString(),
-  itemsCount: 0,
-  purchasesCount: 0,
-};
+import { get, put } from '@/lib/api-client';
 
 export async function getUserProfile(userId: string): Promise<UserProfile> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockUser);
-    }, 300);
-  });
+  return get<UserProfile>(`/users/${userId}/profile`);
 }
 
 export async function updateUserProfile(
   userId: string,
   data: UserProfileUpdate
 ): Promise<UserProfile> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      mockUser = { ...mockUser, ...data };
-      
-      // Update localStorage if current user
-      if (typeof window !== 'undefined') {
-        const currentUser = localStorage.getItem('user');
-        if (currentUser) {
-          const user = JSON.parse(currentUser);
+  const response = await put<UserProfile>(`/users/${userId}/profile`, data);
+
+  // Update localStorage if current user
+  if (typeof window !== 'undefined') {
+    const currentUser = localStorage.getItem('user');
+    if (currentUser) {
+      try {
+        const user = JSON.parse(currentUser);
+        if (user.id === userId) {
           localStorage.setItem('user', JSON.stringify({ ...user, ...data }));
         }
+      } catch {
+        // Invalid JSON in localStorage
       }
-      
-      resolve(mockUser);
-    }, 800);
-  });
-}
+    }
+  }
 
+  return response;
+}

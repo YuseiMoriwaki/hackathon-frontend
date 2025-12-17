@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Waves, UserCircle, User, ShoppingBag, Package, LogOut } from 'lucide-react';
+import { UserCircle, User, ShoppingBag, Package, LogOut } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 
 export function Header() {

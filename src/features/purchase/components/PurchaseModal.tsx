@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Modal, Button, Input } from '@/components/ui';
 import type { Item } from '@/features/items';
@@ -110,15 +111,17 @@ export function PurchaseModal({ isOpen, onClose, item, onSuccess }: PurchaseModa
       {step === 'confirm' && (
         <div className="space-y-6">
           <div className="flex gap-4 glass-card p-4">
-            <img
+            <Image
               src={item.images[0] || 'https://placehold.co/100'}
               alt={item.title}
+              width={100}
+              height={100}
               className="w-24 h-24 object-cover rounded-lg"
             />
             <div>
               <h3 className="font-semibold text-lg text-white">{item.title}</h3>
               <p className="text-2xl font-bold text-blue-300 mt-2">
-                ¥{item.price.toLocaleString()}
+                ¥{item.price}
               </p>
             </div>
           </div>
@@ -239,7 +242,7 @@ export function PurchaseModal({ isOpen, onClose, item, onSuccess }: PurchaseModa
                 name="payment"
                 value="credit"
                 checked={paymentMethod === 'credit'}
-                onChange={(e) => setPaymentMethod(e.target.value as any)}
+                onChange={(e) => setPaymentMethod(e.target.value as 'credit' | 'bank' | 'convenience')}
                 className="mr-3"
               />
               <span className="text-white">クレジットカード</span>
@@ -253,7 +256,7 @@ export function PurchaseModal({ isOpen, onClose, item, onSuccess }: PurchaseModa
                 name="payment"
                 value="bank"
                 checked={paymentMethod === 'bank'}
-                onChange={(e) => setPaymentMethod(e.target.value as any)}
+                onChange={(e) => setPaymentMethod(e.target.value as 'credit' | 'bank' | 'convenience')}
                 className="mr-3"
               />
               <span className="text-white">銀行振込</span>
@@ -267,7 +270,7 @@ export function PurchaseModal({ isOpen, onClose, item, onSuccess }: PurchaseModa
                 name="payment"
                 value="convenience"
                 checked={paymentMethod === 'convenience'}
-                onChange={(e) => setPaymentMethod(e.target.value as any)}
+                onChange={(e) => setPaymentMethod(e.target.value as 'credit' | 'bank' | 'convenience')}
                 className="mr-3"
               />
               <span className="text-white">コンビニ払い</span>
@@ -277,7 +280,7 @@ export function PurchaseModal({ isOpen, onClose, item, onSuccess }: PurchaseModa
           <div className="border-t border-white/10 pt-4">
             <div className="flex justify-between text-lg font-bold mb-4">
               <span className="text-white">合計金額</span>
-              <span className="text-blue-300">¥{item.price.toLocaleString()}</span>
+              <span className="text-blue-300">¥{item.price}</span>
             </div>
 
             <div className="flex gap-3">

@@ -1,5 +1,5 @@
-export type ItemStatus = 'available' | 'sold' | 'reserved';
-export type ItemCategory = 'fashion' | 'electronics' | 'books' | 'sports' | 'home' | 'toys' | 'other';
+export type ItemStatus = 'active' | 'available' | 'sold' | 'removed' | 'reserved';
+export type ItemCategory = 'fashion' | 'electronics' | 'books' | 'sports' | 'home' | 'other';
 
 export interface Item {
   id: string;

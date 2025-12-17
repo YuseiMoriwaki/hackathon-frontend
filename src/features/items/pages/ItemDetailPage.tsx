@@ -29,7 +29,7 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
     try {
       await deleteItem(item.id);
       router.push('/user/listings');
-    } catch (error) {
+    } catch {
       alert('削除に失敗しました');
     }
   };
@@ -62,7 +62,7 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
       <ItemDetail
         item={item}
         onPurchaseClick={onPurchaseClick}
-        canEdit={canEdit}
+        canEdit={canEdit ?? undefined}
         onEditClick={() => router.push(`/sell/${item.id}`)}
         onDeleteClick={() => setShowDeleteConfirm(true)}
       />

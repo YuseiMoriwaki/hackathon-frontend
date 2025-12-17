@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { Header, Container } from '@/components/layouts';
 import { Card, LoadingSpinner, GlassButton } from '@/components/ui';
@@ -41,9 +42,11 @@ export default function PurchasesPage() {
                 <Link key={purchase.id} href={`/items/${purchase.itemId}`}>
                   <Card hover variant="glass">
                     <div className="flex gap-4">
-                      <img
+                      <Image
                         src={purchase.itemImage}
                         alt={purchase.itemTitle}
+                        width={100}
+                        height={100}
                         className="w-24 h-24 object-cover rounded-lg"
                       />
                       <div className="flex-1">
@@ -51,7 +54,7 @@ export default function PurchasesPage() {
                           {purchase.itemTitle}
                         </h3>
                         <p className="text-2xl font-bold text-blue-300 mb-2">
-                          ¥{purchase.itemPrice.toLocaleString()}
+                          ¥{purchase.itemPrice}
                         </p>
                         <p className="text-sm text-white/50">
                           購入日: {new Date(purchase.createdAt).toLocaleDateString('ja-JP')}

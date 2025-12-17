@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { User } from 'lucide-react';
 import { Button } from '@/components/ui';
 import type { Item } from '../types';
@@ -25,7 +26,8 @@ export function ItemDetail({
   onDeleteClick 
 }: ItemDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0);
-  const isAvailable = item.status === 'available';
+  const isAvailable = item.status === "active" || item.status === "available";
+  console.log(item.status);
   const categoryLabel = ITEM_CATEGORIES.find(c => c.value === item.category)?.label;
   const { items: recommendedItems } = useRecommendedItems(item.id, item.category);
 
@@ -36,9 +38,11 @@ export function ItemDetail({
         <div className="max-w-md mx-auto lg:max-w-lg w-full">
           <div className="aspect-square mb-4 rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm">
             {item.images[selectedImage] ? (
-              <img
+              <Image
                 src={item.images[selectedImage]}
                 alt={item.title}
+                width={600}
+                height={600}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -58,7 +62,7 @@ export function ItemDetail({
                     selectedImage === index ? 'border-blue-400 scale-[1.05]' : 'border-white/20 hover:border-white/40'
                   }`}
                 >
-                  <img src={image} alt="" className="w-full h-full object-cover" />
+                  <Image src={image} alt="" width={100} height={100} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -80,7 +84,7 @@ export function ItemDetail({
           </h1>
 
           <div className="text-4xl font-bold text-blue-300 mb-6">
-            ¥{item.price.toLocaleString()}
+            ¥{item.price}
           </div>
 
           <div className="glass-card p-4 mb-6 space-y-3">

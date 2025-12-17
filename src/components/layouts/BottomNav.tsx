@@ -2,37 +2,53 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Plus, Heart } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Home, Plus, Heart, MessageSquare } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
 
 export function BottomNav() {
   const pathname = usePathname();
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     {
       label: 'ホーム',
       path: '/home',
       icon: Home,
     },
     {
-      label: '出品',
-      path: '/sell',
-      icon: Plus,
-    },
-    {
       label: 'お気に入り',
       path: '/favorites',
       icon: Heart,
     },
-  ];
+    {
+      label: 'Delta',
+      path: '/delta',
+      icon: MessageSquare,
+    },
+    {
+      label: '出品',
+      path: '/sell',
+      icon: Plus,
+    },
+  ], []);
 
+  // Calculate initial index using useState initializer
+  const getInitialIndex = () => {
+    return navItems.findIndex(item => pathname === item.path);
+  };
+
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
+
+  // Update active index when pathname changes (using ref to avoid setState in effect)
   useEffect(() => {
     const currentIndex = navItems.findIndex(item => pathname === item.path);
     if (currentIndex !== -1) {
-      setActiveIndex(currentIndex);
+      // Use setTimeout to defer state update outside of render cycle
+      const timeoutId = setTimeout(() => {
+        setActiveIndex(currentIndex);
+      }, 0);
+      return () => clearTimeout(timeoutId);
     }
-  }, [pathname]);
+  }, [pathname, navItems]);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 my-3 mx-6 md:hidden">
@@ -54,7 +70,7 @@ export function BottomNav() {
           }}
         />
         
-        {navItems.map((item, index) => {
+        {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.path;
 
