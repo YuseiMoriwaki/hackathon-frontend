@@ -11,7 +11,7 @@ export function RegisterForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  
+
   const { register, isLoading } = useRegister();
   const router = useRouter();
 
@@ -54,7 +54,7 @@ export function RegisterForm() {
         type="text"
         label="お名前"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={e => setName(e.target.value)}
         required
         placeholder="山田太郎"
       />
@@ -63,7 +63,7 @@ export function RegisterForm() {
         type="email"
         label="メールアドレス"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
         required
         placeholder="example@email.com"
       />
@@ -72,7 +72,7 @@ export function RegisterForm() {
         type="password"
         label="パスワード"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
         required
         placeholder="6文字以上"
         helperText="6文字以上で入力してください"
@@ -82,17 +82,12 @@ export function RegisterForm() {
         type="password"
         label="パスワード（確認）"
         value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        onChange={e => setConfirmPassword(e.target.value)}
         required
         placeholder="パスワードを再入力"
       />
 
-      <Button
-        type="submit"
-        variant="primary"
-        className="w-full"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
         登録
       </Button>
 

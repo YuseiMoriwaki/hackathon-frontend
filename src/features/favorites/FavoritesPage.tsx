@@ -32,11 +32,8 @@ export function FavoritesPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center text-white/50 py-16">
-          お気に入りの商品はありません
-        </div>
+        <div className="text-center text-white/50 py-16">お気に入りの商品はありません</div>
       )}
     </Container>
   );
 }
-

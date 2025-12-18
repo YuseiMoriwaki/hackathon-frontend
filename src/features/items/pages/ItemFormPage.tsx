@@ -50,9 +50,7 @@ export function ItemFormPage({ itemId }: ItemFormPageProps) {
   if (isEditing && !item) {
     return (
       <Container className="py-8">
-        <div className="text-center text-red-300">
-          商品が見つかりません
-        </div>
+        <div className="text-center text-red-300">商品が見つかりません</div>
       </Container>
     );
   }
@@ -64,11 +62,7 @@ export function ItemFormPage({ itemId }: ItemFormPageProps) {
       </h1>
 
       <div className="glass-card p-6 rounded-2xl">
-        <ItemForm
-          initialData={item}
-          onSubmit={handleSubmit}
-          isLoading={isSaving}
-        />
+        <ItemForm initialData={item} onSubmit={handleSubmit} isLoading={isSaving} />
       </div>
     </Container>
   );

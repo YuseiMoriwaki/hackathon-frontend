@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 /**
  * GlobalUIContext - Manages global UI state across the application
@@ -35,9 +29,7 @@ interface GlobalUIContextType {
   setDrawerOpen: (open: boolean) => void;
 }
 
-const GlobalUIContext = createContext<GlobalUIContextType | undefined>(
-  undefined
-);
+const GlobalUIContext = createContext<GlobalUIContextType | undefined>(undefined);
 
 export function GlobalUIProvider({ children }: { children: ReactNode }) {
   const [isInputActive, setIsInputActive] = useState(false);
@@ -94,4 +86,3 @@ export function useGlobalUI() {
   }
   return context;
 }
-

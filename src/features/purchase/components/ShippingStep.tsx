@@ -32,7 +32,7 @@ export function ShippingStep({
         <Input
           label="お名前"
           value={shippingAddress.name}
-          onChange={(e) => onChange({ ...shippingAddress, name: e.target.value })}
+          onChange={e => onChange({ ...shippingAddress, name: e.target.value })}
           required
           placeholder="山田 太郎"
         />
@@ -40,7 +40,7 @@ export function ShippingStep({
         <Input
           label="電話番号"
           value={shippingAddress.phone}
-          onChange={(e) => onChange({ ...shippingAddress, phone: e.target.value })}
+          onChange={e => onChange({ ...shippingAddress, phone: e.target.value })}
           required
           placeholder="09012345678"
         />
@@ -49,7 +49,7 @@ export function ShippingStep({
       <Input
         label="郵便番号"
         value={shippingAddress.postalCode}
-        onChange={(e) => onChange({ ...shippingAddress, postalCode: e.target.value })}
+        onChange={e => onChange({ ...shippingAddress, postalCode: e.target.value })}
         required
         placeholder="123-4567"
       />
@@ -58,7 +58,7 @@ export function ShippingStep({
         <Input
           label="都道府県"
           value={shippingAddress.prefecture}
-          onChange={(e) => onChange({ ...shippingAddress, prefecture: e.target.value })}
+          onChange={e => onChange({ ...shippingAddress, prefecture: e.target.value })}
           required
           placeholder="東京都"
         />
@@ -66,7 +66,7 @@ export function ShippingStep({
         <Input
           label="市区町村"
           value={shippingAddress.city}
-          onChange={(e) => onChange({ ...shippingAddress, city: e.target.value })}
+          onChange={e => onChange({ ...shippingAddress, city: e.target.value })}
           required
           placeholder="渋谷区"
         />
@@ -75,7 +75,7 @@ export function ShippingStep({
       <Input
         label="番地"
         value={shippingAddress.address}
-        onChange={(e) => onChange({ ...shippingAddress, address: e.target.value })}
+        onChange={e => onChange({ ...shippingAddress, address: e.target.value })}
         required
         placeholder="道玄坂1-2-3"
       />
@@ -83,7 +83,7 @@ export function ShippingStep({
       <Input
         label="建物名・部屋番号（任意）"
         value={shippingAddress.building || ''}
-        onChange={(e) => onChange({ ...shippingAddress, building: e.target.value })}
+        onChange={e => onChange({ ...shippingAddress, building: e.target.value })}
         placeholder="〇〇ビル 4F"
       />
 
@@ -98,4 +98,3 @@ export function ShippingStep({
     </div>
   );
 }
-

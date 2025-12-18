@@ -6,4 +6,3 @@ export type UploadedFile = {
   mime_type: string;
   file_size: number;
 };
-

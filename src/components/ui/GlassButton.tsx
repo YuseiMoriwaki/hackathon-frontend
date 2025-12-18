@@ -31,4 +31,3 @@ export function GlassButton({ children, onClick, className = '', ariaLabel }: Gl
     </button>
   );
 }
-

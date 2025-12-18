@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #0a0a0a;
@@ -22,7 +22,9 @@ body {
 @layer components {
   .glass-card {
     @apply bg-black/60 backdrop-blur-sm border border-black/10 rounded-2xl;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
   .rounded-4xl {
@@ -30,12 +32,16 @@ body {
   }
 
   .glass-card-hover:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.16);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
 
   .glass-card-special {
     @apply bg-white/4 backdrop-blur-sm border border-black/10 rounded-[20px];
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
   .glass-button {

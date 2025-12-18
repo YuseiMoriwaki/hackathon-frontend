@@ -17,4 +17,3 @@ export { useRecommendedItems } from './hooks/useRecommendedItems';
 
 // Types
 export type { Item, ItemFormData, ItemFilters, ItemStatus, ItemCategory } from './types';
-

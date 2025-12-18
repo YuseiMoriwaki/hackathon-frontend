@@ -215,4 +215,3 @@ export function CheckoutPage({ itemId }: CheckoutPageProps) {
     </>
   );
 }
-

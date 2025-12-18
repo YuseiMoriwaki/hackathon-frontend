@@ -14,4 +14,3 @@ export const metadata = {
   title: '商品を編集 - フリマアプリ',
   description: '商品情報を編集',
 };
-

@@ -21,4 +21,3 @@ export function Container({ children, size = 'lg', className = '' }: ContainerPr
     </div>
   );
 }
-

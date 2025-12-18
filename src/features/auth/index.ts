@@ -9,4 +9,3 @@ export { useLogout } from './hooks/useLogout';
 
 // Types
 export type { User, LoginCredentials, RegisterData, AuthResponse } from './types';
-

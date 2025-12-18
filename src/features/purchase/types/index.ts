@@ -32,4 +32,3 @@ export interface ShippingAddress {
   name: string;
   phone: string;
 }
-

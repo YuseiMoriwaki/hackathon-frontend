@@ -48,7 +48,6 @@ export function useSendMessage({
       notificationId,
       timerCompleted,
     }: SendMessageOptions) => {
-
       // Abort existing stream
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
@@ -62,7 +61,7 @@ export function useSendMessage({
 
       // Remove demo messages when user sends first real message
       const currentMessages = messages.filter(msg => !msg.id?.startsWith('demo-'));
-      
+
       // Create temporary user message
       let tempUserMsg: Message | null = null;
       if (content.trim() || (files && files.length > 0)) {
@@ -129,7 +128,7 @@ export function useSendMessage({
 
         if (!response.ok) {
           const errorText = await response.text();
-          
+
           // Handle 404 as demo mode (backend not connected)
           if (response.status === 404) {
             // Simulate AI response with typing animation
@@ -140,7 +139,7 @@ export function useSendMessage({
               'おっしゃる通りです。他にも質問があれば、お気軽にどうぞ。',
             ];
             const randomResponse = demoResponses[Math.floor(Math.random() * demoResponses.length)];
-            
+
             // Simulate typing animation
             let typedContent = '';
             for (let i = 0; i < randomResponse.length; i++) {
@@ -148,19 +147,17 @@ export function useSendMessage({
               typedContent += randomResponse[i];
               onMessageUpdate?.(
                 newMessages.map(msg =>
-                  msg.id === tempAIMsg.id
-                    ? { ...msg, content: typedContent }
-                    : msg
+                  msg.id === tempAIMsg.id ? { ...msg, content: typedContent } : msg
                 )
               );
             }
-            
+
             setIsLoading(false);
             abortControllerRef.current = null;
             onComplete?.();
             return;
           }
-          
+
           console.error('Failed to send message:', response.status, errorText);
           throw new Error(`Failed to send message: ${response.status}`);
         }
@@ -192,24 +189,20 @@ export function useSendMessage({
             if (line.startsWith('data: ')) {
               const data = line.slice(6);
               if (data === '[DONE]') continue;
-              
+
               try {
                 const parsedData = JSON.parse(data);
-                
+
                 // Handle items data (sent before content stream)
                 if (parsedData.type === 'items' && Array.isArray(parsedData.items)) {
                   items = parsedData.items;
                   // Immediately update message with items
                   onMessageUpdate?.(
-                    newMessages.map(msg =>
-                      msg.id === tempAIMsg.id
-                        ? { ...msg, items }
-                        : msg
-                    )
+                    newMessages.map(msg => (msg.id === tempAIMsg.id ? { ...msg, items } : msg))
                   );
                   continue;
                 }
-                
+
                 // Handle content stream data
                 if (parsedData && typeof parsedData.data === 'string') {
                   accumulatedContent += parsedData.data;
@@ -222,9 +215,7 @@ export function useSendMessage({
                 if (now - lastUpdateTime >= UPDATE_THROTTLE) {
                   onMessageUpdate?.(
                     newMessages.map(msg =>
-                      msg.id === tempAIMsg.id
-                        ? { ...msg, content: accumulatedContent, items }
-                        : msg
+                      msg.id === tempAIMsg.id ? { ...msg, content: accumulatedContent, items } : msg
                     )
                   );
                   lastUpdateTime = now;
@@ -240,9 +231,7 @@ export function useSendMessage({
         // Final update (include items if present)
         onMessageUpdate?.(
           newMessages.map(msg =>
-            msg.id === tempAIMsg.id
-              ? { ...msg, content: accumulatedContent, items }
-              : msg
+            msg.id === tempAIMsg.id ? { ...msg, content: accumulatedContent, items } : msg
           )
         );
 
@@ -256,16 +245,13 @@ export function useSendMessage({
           return;
         }
 
-        const errorMessage =
-          err instanceof Error ? err.message : 'An error occurred';
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred';
         setError(errorMessage);
         console.error('Error in sendMessage:', err);
 
         // Remove temporary messages on error
         onMessageUpdate?.(
-          messages.filter(
-            msg => msg.id !== tempUserMsg?.id && msg.id !== tempAIMsg.id
-          )
+          messages.filter(msg => msg.id !== tempUserMsg?.id && msg.id !== tempAIMsg.id)
         );
       } finally {
         setIsLoading(false);

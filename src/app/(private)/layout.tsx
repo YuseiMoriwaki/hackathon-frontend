@@ -4,11 +4,7 @@ import { AuthGuard } from '@/features/auth';
 import { GlobalUIProvider } from '@/features/ai_chat/contexts/GlobalUIContext';
 import { Header } from '@/components/layouts';
 
-export default function PrivateLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PrivateLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthGuard>
       <GlobalUIProvider>
@@ -20,4 +16,3 @@ export default function PrivateLayout({
     </AuthGuard>
   );
 }
-

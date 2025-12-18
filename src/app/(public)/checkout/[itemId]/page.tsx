@@ -12,4 +12,3 @@ export default function CheckoutPageRoute({ params }: { params: Promise<{ itemId
     </main>
   );
 }
-

@@ -18,14 +18,14 @@ export function ItemCard({ item }: ItemCardProps) {
   const { favorites, mutate } = useFavorites(user?.id);
   const { addFavorite } = useAddFavorite(user?.id);
   const { removeFavorite } = useRemoveFavorite(user?.id);
-  
+
   const isFavorited = favorites.includes(item.id);
   const isAvailable = item.status === 'active' || item.status === 'available';
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (!user) return;
 
     try {
@@ -52,9 +52,7 @@ export function ItemCard({ item }: ItemCardProps) {
             aria-label={isFavorited ? 'お気に入りから削除' : 'お気に入りに追加'}
           >
             <Heart
-              className={`w-5 h-5 ${
-                isFavorited ? 'fill-red-500 text-red-500' : 'text-white/70'
-              }`}
+              className={`w-5 h-5 ${isFavorited ? 'fill-red-500 text-red-500' : 'text-white/70'}`}
             />
           </button>
         )}
@@ -81,18 +79,12 @@ export function ItemCard({ item }: ItemCardProps) {
             </div>
           )}
         </div>
-        
-        <h3 className="font-semibold text-white mb-2 line-clamp-2">
-          {item.title}
-        </h3>
-        
-        <p className="text-2xl font-bold text-blue-300 mb-2">
-          ¥{item.price}
-        </p>
-        
-        <p className="text-sm text-white/50">
-          {item.sellerName}
-        </p>
+
+        <h3 className="font-semibold text-white mb-2 line-clamp-2">{item.title}</h3>
+
+        <p className="text-2xl font-bold text-blue-300 mb-2">¥{item.price}</p>
+
+        <p className="text-sm text-white/50">{item.sellerName}</p>
       </Card>
     </Link>
   );

@@ -25,11 +25,10 @@ export default function HomePage() {
 
   return (
     <>
-      
       {/* Fixed Search Bar */}
       <div className="fixed top-[64px] left-0 right-0 z-30 bg-transparent px-4 md:px-6 py-3">
         <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <SearchBar 
+          <SearchBar
             value={searchValue}
             onChange={setSearchValue}
             onSearch={handleSearch}
@@ -54,7 +53,7 @@ export default function HomePage() {
             <span className="text-white hidden sm:inline">絞り込み</span>
           </button>
         </div>
-        
+
         {/* Collapsible Filters */}
         {isFiltersOpen && (
           <div className="max-w-7xl mx-auto mt-3">
@@ -82,9 +81,7 @@ export default function HomePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center text-white/50 py-16">
-                商品が見つかりませんでした
-              </div>
+              <div className="text-center text-white/50 py-16">商品が見つかりませんでした</div>
             )}
 
             {items && items.length > 8 && (
@@ -97,7 +94,7 @@ export default function HomePage() {
           </div>
         </Container>
       </main>
-      
+
       <BottomNav />
     </>
   );

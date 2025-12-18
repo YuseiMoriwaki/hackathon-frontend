@@ -23,4 +23,3 @@ export function useLogout() {
     isLoading: isMutating,
   };
 }
-

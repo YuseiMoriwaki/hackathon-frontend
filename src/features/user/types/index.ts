@@ -16,4 +16,3 @@ export interface UserProfileUpdate {
   bio?: string;
   location?: string;
 }
-

@@ -41,9 +41,7 @@ export function UserProfilePage({ userId, canEdit = false }: UserProfilePageProp
   if (!user) {
     return (
       <Container className="py-8">
-        <div className="text-center text-red-300">
-          ユーザーが見つかりません
-        </div>
+        <div className="text-center text-red-300">ユーザーが見つかりません</div>
       </Container>
     );
   }
@@ -69,11 +67,7 @@ export function UserProfilePage({ userId, canEdit = false }: UserProfilePageProp
 
         {isEditing ? (
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <ProfileEditForm
-              user={user}
-              onSubmit={handleUpdate}
-              isLoading={isUpdating}
-            />
+            <ProfileEditForm user={user} onSubmit={handleUpdate} isLoading={isUpdating} />
           </div>
         ) : (
           <UserProfile user={user} />
@@ -82,4 +76,3 @@ export function UserProfilePage({ userId, canEdit = false }: UserProfilePageProp
     </Container>
   );
 }
-

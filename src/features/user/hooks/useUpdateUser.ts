@@ -26,4 +26,3 @@ export function useUpdateUser(userId: string) {
     error,
   };
 }
-

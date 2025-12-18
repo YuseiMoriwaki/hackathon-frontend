@@ -33,8 +33,8 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
                     isCompleted
                       ? 'bg-green-500/15 border border-green-500/40'
                       : isCurrent
-                      ? 'bg-blue-500/15 border border-blue-500/40'
-                      : 'bg-white/3 border border-white/15'
+                        ? 'bg-blue-500/15 border border-blue-500/40'
+                        : 'bg-white/3 border border-white/15'
                   }`}
                 >
                   {isCompleted ? (
@@ -75,4 +75,3 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
     </div>
   );
 }
-

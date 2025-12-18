@@ -20,15 +20,7 @@ type ChatContainerProps = {
 };
 
 const ChatContainer = forwardRef<HTMLDivElement, ChatContainerProps>(
-  (
-    {
-      messages,
-      sendMessage,
-      streamingContainerRef,
-      isInitialMount,
-    },
-    ref
-  ) => {
+  ({ messages, sendMessage, streamingContainerRef, isInitialMount }, ref) => {
     // Separate committed (saved to DB) messages from streaming (temporary) messages
     // Temporary messages have string IDs from Date.now().toString()
     const committedMessages: (Message | AIMessage)[] = [];
@@ -69,44 +61,31 @@ const ChatContainer = forwardRef<HTMLDivElement, ChatContainerProps>(
     }
 
     // Determine what to show in the streaming/recent container
-    const containerMessages = hasStreamingMessages
-      ? streamingMessages
-      : recentMessages;
+    const containerMessages = hasStreamingMessages ? streamingMessages : recentMessages;
     // Don't show container on initial mount
-    const shouldShowContainer =
-      !isInitialMount?.current && containerMessages.length > 0;
+    const shouldShowContainer = !isInitialMount?.current && containerMessages.length > 0;
 
     return (
-      <div className='flex flex-col flex-1 bg-linear-to-br from-slate-950 via-black to-slate-950 relative overflow-hidden'>
+      <div className="flex flex-col flex-1 bg-linear-to-br from-slate-950 via-black to-slate-950 relative overflow-hidden">
         {/* メッセージエリア - GPU最適化 */}
-        <ScrollableView
-          ref={ref}
-          className={`pt-20 ${
-            isInputActive ? 'pb-6' : 'pb-20'
-          }`}
-        >
+        <ScrollableView ref={ref} className={`pt-20 ${isInputActive ? 'pb-6' : 'pb-20'}`}>
           {/* Messages Content */}
           <div className="relative">
             {/* Messages before the recent/streaming section */}
             {messagesBeforeRecent.map((message, i) => {
               const messageId =
-                'id' in message && typeof message.id === 'number'
-                  ? message.id
-                  : `committed-${i}`;
+                'id' in message && typeof message.id === 'number' ? message.id : `committed-${i}`;
               const key = `${messageId}-${i}`;
 
               return (
                 <div key={key} data-message-index={i}>
-                  <MessageItem
-                    message={message}
-                    sendMessage={sendMessage}
-                  />
+                  <MessageItem message={message} sendMessage={sendMessage} />
                 </div>
               );
             })}
 
             {/* Small spacing when no container to show */}
-            {!shouldShowContainer && <div className='h-16'></div>}
+            {!shouldShowContainer && <div className="h-16"></div>}
 
             {/* Streaming/Recent messages container with min-height of container minus header */}
             {shouldShowContainer && (
@@ -122,19 +101,13 @@ const ChatContainer = forwardRef<HTMLDivElement, ChatContainerProps>(
                   const key = messageId;
 
                   return (
-                    <div
-                      key={key}
-                      data-message-index={messagesBeforeRecent.length + i}
-                    >
-                      <MessageItem
-                        message={message}
-                        sendMessage={sendMessage}
-                      />
+                    <div key={key} data-message-index={messagesBeforeRecent.length + i}>
+                      <MessageItem message={message} sendMessage={sendMessage} />
                     </div>
                   );
                 })}
                 {/* Extra space to ensure content can grow */}
-                <div className='grow'></div>
+                <div className="grow"></div>
               </div>
             )}
           </div>

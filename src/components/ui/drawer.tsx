@@ -200,10 +200,7 @@ const DrawerOverlay = React.forwardRef<HTMLDivElement, DrawerOverlayProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          'fixed inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in-0',
-          className
-        )}
+        className={cn('fixed inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in-0', className)}
         style={{ zIndex }}
         onClick={onClose}
         {...props}
@@ -244,22 +241,24 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
     },
     ref
   ) => {
-    const { onClose, dragOffset, setDragOffset, drawerRef } =
-      useDrawerContext();
+    const { onClose, dragOffset, setDragOffset, drawerRef } = useDrawerContext();
 
     // Merge refs
-    const mergedRef = React.useCallback((node: HTMLDivElement | null) => {
-      if (typeof ref === 'function') {
-        ref(node);
-      } else if (ref) {
-        ref.current = node;
-      }
-      // Update drawerRef from context (mutable ref)
-      if (drawerRef && 'current' in drawerRef) {
-        // eslint-disable-next-line react-hooks/immutability
-        (drawerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-      }
-    }, [ref, drawerRef]);
+    const mergedRef = React.useCallback(
+      (node: HTMLDivElement | null) => {
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+        // Update drawerRef from context (mutable ref)
+        if (drawerRef && 'current' in drawerRef) {
+          // eslint-disable-next-line react-hooks/immutability
+          (drawerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }
+      },
+      [ref, drawerRef]
+    );
 
     // Swipe-to-close gesture (simplified without @use-gesture/react)
     const dragHandler = useDragHandler(
@@ -271,9 +270,9 @@ const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
       },
       (offset: number, velocity: number) => {
         if (!swipeToClose) return;
-            // Close if swiped down past threshold or fast swipe down
+        // Close if swiped down past threshold or fast swipe down
         if (offset > swipeThreshold || (velocity > velocityThreshold && offset > 0)) {
-              onClose();
+          onClose();
         }
         setDragOffset(0);
       }
@@ -320,13 +319,10 @@ const DrawerHandle = React.forwardRef<HTMLDivElement, DrawerHandleProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          'pt-2 pb-1 cursor-grab active:cursor-grabbing touch-none',
-          className
-        )}
+        className={cn('pt-2 pb-1 cursor-grab active:cursor-grabbing touch-none', className)}
         {...props}
       >
-        <div className='w-12 h-1 bg-white/20 rounded-full mx-auto' />
+        <div className="w-12 h-1 bg-white/20 rounded-full mx-auto" />
       </div>
     );
   }
@@ -364,11 +360,7 @@ type DrawerTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
 const DrawerTitle = React.forwardRef<HTMLHeadingElement, DrawerTitleProps>(
   ({ className, ...props }, ref) => {
     return (
-      <h3
-        ref={ref}
-        className={cn('text-lg font-semibold text-white', className)}
-        {...props}
-      />
+      <h3 ref={ref} className={cn('text-lg font-semibold text-white', className)} {...props} />
     );
   }
 );
@@ -382,13 +374,7 @@ type DrawerBodyProps = React.HTMLAttributes<HTMLDivElement>;
 
 const DrawerBody = React.forwardRef<HTMLDivElement, DrawerBodyProps>(
   ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn('flex-1 overflow-y-auto p-4', className)}
-        {...props}
-      />
-    );
+    return <div ref={ref} className={cn('flex-1 overflow-y-auto p-4', className)} {...props} />;
   }
 );
 DrawerBody.displayName = 'DrawerBody';
@@ -433,11 +419,8 @@ const DrawerClose = React.forwardRef<HTMLButtonElement, DrawerCloseProps>(
     return (
       <button
         ref={ref}
-        type='button'
-        className={cn(
-          'p-2 hover:bg-white/10 rounded-lg transition-colors',
-          className
-        )}
+        type="button"
+        className={cn('p-2 hover:bg-white/10 rounded-lg transition-colors', className)}
         onClick={handleClick}
         {...props}
       />

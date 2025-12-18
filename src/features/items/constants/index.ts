@@ -16,4 +16,3 @@ export const STATUS_LABELS: Record<ItemStatus, string> = {
   removed: '削除済み',
   reserved: '予約中',
 };
-

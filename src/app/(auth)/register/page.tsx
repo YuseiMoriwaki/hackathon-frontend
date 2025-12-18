@@ -8,4 +8,3 @@ export const metadata = {
   title: '新規登録 - フリマアプリ',
   description: '新規登録ページ',
 };
-

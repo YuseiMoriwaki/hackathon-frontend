@@ -46,21 +46,21 @@ export function ProfileEditForm({ user, onSubmit, isLoading }: ProfileEditFormPr
       <Input
         label="名前"
         value={formData.name}
-        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
         required
       />
 
       <Input
         label="居住地"
         value={formData.location}
-        onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, location: e.target.value }))}
         placeholder="東京都"
       />
 
       <Textarea
         label="自己紹介"
         value={formData.bio}
-        onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, bio: e.target.value }))}
         rows={4}
         placeholder="自己紹介を入力してください"
       />
@@ -68,17 +68,11 @@ export function ProfileEditForm({ user, onSubmit, isLoading }: ProfileEditFormPr
       <Input
         label="アバター画像URL"
         value={formData.avatar}
-        onChange={(e) => setFormData(prev => ({ ...prev, avatar: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, avatar: e.target.value }))}
         placeholder="https://example.com/avatar.jpg"
       />
 
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        className="w-full"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="primary" size="lg" className="w-full" isLoading={isLoading}>
         更新する
       </Button>
     </form>

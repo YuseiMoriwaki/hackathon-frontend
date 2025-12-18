@@ -12,10 +12,7 @@ type TimerDisplayProps = {
   ) => Promise<void>;
 };
 
-export const TimerDisplay: React.FC<TimerDisplayProps> = ({
-  timer,
-  sendMessage,
-}) => {
+export const TimerDisplay: React.FC<TimerDisplayProps> = ({ timer, sendMessage }) => {
   // Calculate initial remaining seconds using useState initializer
   const calculateInitialRemaining = () => {
     const endsAt = new Date(timer.ends_at);
@@ -49,10 +46,7 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
       console.log('now timestamp:', now.getTime());
       console.log('difference (ms):', endsAt.getTime() - now.getTime());
 
-      const remaining = Math.max(
-        0,
-        Math.floor((endsAt.getTime() - now.getTime()) / 1000)
-      );
+      const remaining = Math.max(0, Math.floor((endsAt.getTime() - now.getTime()) / 1000));
       console.log('Calculated remaining seconds:', remaining);
       console.log('===========================');
 
@@ -89,10 +83,7 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
 
   console.log('Current remainingSeconds:', remainingSeconds);
   console.log('Timer status check:', timer.status === 'completed');
-  console.log(
-    'Will render?',
-    !(remainingSeconds === 0 || timer.status === 'completed')
-  );
+  console.log('Will render?', !(remainingSeconds === 0 || timer.status === 'completed'));
 
   // 時間切れまたはcompleted → 非表示
   if (remainingSeconds === 0 || timer.status === 'completed') {
@@ -112,25 +103,21 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
   console.log('TimerDisplay rendering with timeDisplay:', timeDisplay);
 
   return (
-    <div className='flex justify-start items-center my-6 px-2'>
-      <div className='bg-black/20 backdrop-blur-xl rounded-[20px] px-6 py-2 flex items-center justify-between min-w-[270px] border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)] transition-all duration-300'>
+    <div className="flex justify-start items-center my-6 px-2">
+      <div className="bg-black/20 backdrop-blur-xl rounded-[20px] px-6 py-2 flex items-center justify-between min-w-[270px] border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)] transition-all duration-300">
         {/* 左側: 時間表示 */}
-        <div className='flex flex-col items-start'>
-          <div className='text-3xl font-light text-white tracking-tight'>
-            {timeDisplay}
-          </div>
-          <div className='text-sm text-white/60 font-normal mt-1 px-2'>
-            Timer
-          </div>
+        <div className="flex flex-col items-start">
+          <div className="text-3xl font-light text-white tracking-tight">{timeDisplay}</div>
+          <div className="text-sm text-white/60 font-normal mt-1 px-2">Timer</div>
         </div>
 
         {/* 右側: 一時停止ボタン */}
-        <div className='relative'>
+        <div className="relative">
           {/* 一時停止ボタン - 円の中にアイコン */}
-          <button className='w-12 h-12 rounded-full border-2 border-orange-400 bg-transparent flex items-center justify-center hover:bg-orange-400/10 transition-colors'>
-            <div className='flex space-x-1'>
-              <div className='w-1 h-4 bg-orange-400 rounded-full'></div>
-              <div className='w-1 h-4 bg-orange-400 rounded-full'></div>
+          <button className="w-12 h-12 rounded-full border-2 border-orange-400 bg-transparent flex items-center justify-center hover:bg-orange-400/10 transition-colors">
+            <div className="flex space-x-1">
+              <div className="w-1 h-4 bg-orange-400 rounded-full"></div>
+              <div className="w-1 h-4 bg-orange-400 rounded-full"></div>
             </div>
           </button>
         </div>

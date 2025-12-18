@@ -18,15 +18,15 @@ interface ItemDetailProps {
   onDeleteClick?: () => void;
 }
 
-export function ItemDetail({ 
-  item, 
-  onPurchaseClick, 
+export function ItemDetail({
+  item,
+  onPurchaseClick,
   canEdit = false,
   onEditClick,
-  onDeleteClick 
+  onDeleteClick,
 }: ItemDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0);
-  const isAvailable = item.status === "active" || item.status === "available";
+  const isAvailable = item.status === 'active' || item.status === 'available';
   console.log(item.status);
   const categoryLabel = ITEM_CATEGORIES.find(c => c.value === item.category)?.label;
   const { items: recommendedItems } = useRecommendedItems(item.id, item.category);
@@ -51,7 +51,7 @@ export function ItemDetail({
               </div>
             )}
           </div>
-          
+
           {item.images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {item.images.map((image, index) => (
@@ -59,10 +59,18 @@ export function ItemDetail({
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`aspect-square rounded-md overflow-hidden border-2 transition-all duration-300 ${
-                    selectedImage === index ? 'border-blue-400 scale-[1.05]' : 'border-white/20 hover:border-white/40'
+                    selectedImage === index
+                      ? 'border-blue-400 scale-[1.05]'
+                      : 'border-white/20 hover:border-white/40'
                   }`}
                 >
-                  <Image src={image} alt="" width={100} height={100} className="w-full h-full object-cover" />
+                  <Image
+                    src={image}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -72,20 +80,20 @@ export function ItemDetail({
         {/* Details */}
         <div>
           <div className="mb-4">
-            <span className={`glass-badge ${
-              isAvailable ? 'bg-green-500/20 text-green-300 border-green-500/30' : 'bg-white/10 text-white/70 border-white/20'
-            } border`}>
+            <span
+              className={`glass-badge ${
+                isAvailable
+                  ? 'bg-green-500/20 text-green-300 border-green-500/30'
+                  : 'bg-white/10 text-white/70 border-white/20'
+              } border`}
+            >
               {STATUS_LABELS[item.status]}
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold text-white mb-4">
-            {item.title}
-          </h1>
+          <h1 className="text-3xl font-bold text-white mb-4">{item.title}</h1>
 
-          <div className="text-4xl font-bold text-blue-300 mb-6">
-            ¥{item.price}
-          </div>
+          <div className="text-4xl font-bold text-blue-300 mb-6">¥{item.price}</div>
 
           <div className="glass-card p-4 mb-6 space-y-3">
             <div className="flex justify-between">
@@ -102,29 +110,17 @@ export function ItemDetail({
 
           {canEdit ? (
             <div className="flex gap-3">
-              <Button
-                onClick={onEditClick}
-                variant="primary"
-                className="flex-1"
-              >
+              <Button onClick={onEditClick} variant="primary" className="flex-1">
                 編集
               </Button>
-              <Button
-                onClick={onDeleteClick}
-                variant="danger"
-                className="flex-1"
-              >
+              <Button onClick={onDeleteClick} variant="danger" className="flex-1">
                 削除
               </Button>
             </div>
           ) : (
-            isAvailable && onPurchaseClick && (
-              <Button
-                onClick={onPurchaseClick}
-                variant="primary"
-                size="lg"
-                className="w-full"
-              >
+            isAvailable &&
+            onPurchaseClick && (
+              <Button onClick={onPurchaseClick} variant="primary" size="lg" className="w-full">
                 Buy
               </Button>
             )

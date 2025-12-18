@@ -17,4 +17,3 @@ export function usePurchaseHistory(userId: string) {
     mutate,
   };
 }
-

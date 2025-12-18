@@ -7,11 +7,10 @@ export { usePurchase } from './hooks/usePurchase';
 export { usePurchaseHistory } from './hooks/usePurchaseHistory';
 
 // Types
-export type { 
-  Purchase, 
-  PurchaseRequest, 
-  ShippingAddress, 
+export type {
+  Purchase,
+  PurchaseRequest,
+  ShippingAddress,
   PaymentMethod,
-  CheckoutStep 
+  CheckoutStep,
 } from './types';
-

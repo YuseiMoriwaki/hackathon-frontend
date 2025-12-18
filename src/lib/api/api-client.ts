@@ -24,7 +24,7 @@ export async function apiRequest<T = unknown>(
   options: RequestInit = {}
 ): Promise<T> {
   const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
-  
+
   const config: RequestInit = {
     ...options,
     headers: {
@@ -67,12 +67,9 @@ export async function apiRequest<T = unknown>(
     if (error instanceof ApiError) {
       throw error;
     }
-    
+
     // Network error or other fetch errors
-    throw new ApiError(
-      error instanceof Error ? error.message : 'Network error occurred',
-      0
-    );
+    throw new ApiError(error instanceof Error ? error.message : 'Network error occurred', 0);
   }
 }
 
@@ -112,6 +109,3 @@ export async function del<T = unknown>(endpoint: string, data?: unknown): Promis
     body: data ? JSON.stringify(data) : undefined,
   });
 }
-
-
-

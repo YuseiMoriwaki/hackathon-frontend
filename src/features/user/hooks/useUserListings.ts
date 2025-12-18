@@ -17,4 +17,3 @@ export function useUserListings(userId: string) {
     mutate,
   };
 }
-

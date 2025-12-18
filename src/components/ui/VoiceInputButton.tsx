@@ -2,13 +2,7 @@
 
 import { Mic } from 'lucide-react';
 
-import {
-  useState,
-  useRef,
-  useEffect,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 // 音声認識APIの型定義
 interface SpeechRecognitionResult {
@@ -62,14 +56,8 @@ export interface VoiceInputButtonRef {
   restartRecording: () => void;
 }
 
-export const VoiceInputButton = forwardRef<
-  VoiceInputButtonRef,
-  VoiceInputButtonProps
->(
-  (
-    { onTranscriptChange, currentText = '', disabled = false, className = '' },
-    ref
-  ) => {
+export const VoiceInputButton = forwardRef<VoiceInputButtonRef, VoiceInputButtonProps>(
+  ({ onTranscriptChange, currentText = '', disabled = false, className = '' }, ref) => {
     const [isRecording, setIsRecording] = useState(false);
     const recognitionRef = useRef<SpeechRecognition | null>(null);
     const finalTranscriptRef = useRef<string>('');
@@ -93,8 +81,7 @@ export const VoiceInputButton = forwardRef<
     }, []);
 
     const startRecording = (overrideText?: string) => {
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
         console.error('音声認識APIがサポートされていません');
@@ -102,8 +89,7 @@ export const VoiceInputButton = forwardRef<
       }
 
       // 録音開始時に現在のテキストを保存（overrideTextがあればそれを使用）
-      finalTranscriptRef.current =
-        overrideText !== undefined ? overrideText : currentText;
+      finalTranscriptRef.current = overrideText !== undefined ? overrideText : currentText;
 
       // 未確定文字列をリセット
       lastInterimTranscriptRef.current = '';
@@ -241,7 +227,7 @@ export const VoiceInputButton = forwardRef<
       <button
         onClick={handleVoiceInput}
         disabled={disabled}
-        type='button'
+        type="button"
         title={isRecording ? '音声認識を停止' : '音声認識を開始'}
         className={`${className} relative flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300`}
       >

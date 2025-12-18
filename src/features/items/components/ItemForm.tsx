@@ -72,7 +72,7 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
       <Input
         label="商品名"
         value={formData.title}
-        onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
         required
         placeholder="商品名を入力"
       />
@@ -80,7 +80,7 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
       <Textarea
         label="商品説明"
         value={formData.description}
-        onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+        onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
         required
         rows={6}
         placeholder="商品の詳細を入力してください"
@@ -90,19 +90,19 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
         type="number"
         label="価格（円）"
         value={formData.price}
-        onChange={(e) => setFormData(prev => ({ ...prev, price: Number(e.target.value) }))}
+        onChange={e => setFormData(prev => ({ ...prev, price: Number(e.target.value) }))}
         required
         min={1}
         placeholder="1000"
       />
 
       <div>
-        <label className="block text-sm font-medium text-white mb-2">
-          カテゴリー
-        </label>
+        <label className="block text-sm font-medium text-white mb-2">カテゴリー</label>
         <select
           value={formData.category}
-          onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as ItemCategory }))}
+          onChange={e =>
+            setFormData(prev => ({ ...prev, category: e.target.value as ItemCategory }))
+          }
           className="glass-input w-full px-4 py-2.5"
           required
         >
@@ -115,15 +115,22 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-white mb-2">
-          画像（最大5枚）
-        </label>
-        
+        <label className="block text-sm font-medium text-white mb-2">画像（最大5枚）</label>
+
         {formData.images.length > 0 && (
           <div className="grid grid-cols-3 gap-3 mb-3">
             {formData.images.map((img, index) => (
-              <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-white/10">
-                <Image src={img} alt="" width={100} height={100} className="w-full h-full object-cover" />
+              <div
+                key={index}
+                className="relative aspect-square rounded-lg overflow-hidden border border-white/10"
+              >
+                <Image
+                  src={img}
+                  alt=""
+                  width={100}
+                  height={100}
+                  className="w-full h-full object-cover"
+                />
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}
@@ -141,16 +148,11 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
             <Input
               type="url"
               value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              onChange={e => setImageUrl(e.target.value)}
               placeholder="画像URLを入力"
               className="flex-1"
             />
-            <Button
-              type="button"
-              onClick={handleAddImage}
-              variant="secondary"
-              disabled={!imageUrl}
-            >
+            <Button type="button" onClick={handleAddImage} variant="secondary" disabled={!imageUrl}>
               追加
             </Button>
           </div>
@@ -160,13 +162,7 @@ export function ItemForm({ initialData, onSubmit, isLoading }: ItemFormProps) {
         </p>
       </div>
 
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        className="w-full"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="primary" size="lg" className="w-full" isLoading={isLoading}>
         {initialData ? '更新する' : '出品する'}
       </Button>
     </form>

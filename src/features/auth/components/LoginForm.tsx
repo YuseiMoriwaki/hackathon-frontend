@@ -9,7 +9,7 @@ export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
+
   const { login, isLoading } = useLogin();
   const router = useRouter();
 
@@ -48,7 +48,7 @@ export function LoginForm() {
         type="email"
         label="メールアドレス"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
         required
         placeholder="example@email.com"
       />
@@ -57,17 +57,12 @@ export function LoginForm() {
         type="password"
         label="パスワード"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
         required
         placeholder="パスワードを入力"
       />
 
-      <Button
-        type="submit"
-        variant="primary"
-        className="w-full"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
         ログイン
       </Button>
 

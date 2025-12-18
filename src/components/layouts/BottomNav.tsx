@@ -8,28 +8,31 @@ import { useState, useEffect, useMemo } from 'react';
 export function BottomNav() {
   const pathname = usePathname();
 
-  const navItems = useMemo(() => [
-    {
-      label: 'ホーム',
-      path: '/home',
-      icon: Home,
-    },
-    {
-      label: 'お気に入り',
-      path: '/favorites',
-      icon: Heart,
-    },
-    {
-      label: 'Delta',
-      path: '/delta',
-      icon: MessageSquare,
-    },
-    {
-      label: '出品',
-      path: '/sell',
-      icon: Plus,
-    },
-  ], []);
+  const navItems = useMemo(
+    () => [
+      {
+        label: 'ホーム',
+        path: '/home',
+        icon: Home,
+      },
+      {
+        label: 'お気に入り',
+        path: '/favorites',
+        icon: Heart,
+      },
+      {
+        label: 'Delta',
+        path: '/delta',
+        icon: MessageSquare,
+      },
+      {
+        label: '出品',
+        path: '/sell',
+        icon: Plus,
+      },
+    ],
+    []
+  );
 
   // Calculate initial index using useState initializer
   const getInitialIndex = () => {
@@ -52,7 +55,8 @@ export function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 my-3 mx-6 md:hidden">
-      <div className="
+      <div
+        className="
         bg-white/2 backdrop-blur-sm 
         border border-black/10 
         rounded-full 
@@ -60,17 +64,18 @@ export function BottomNav() {
         shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.12)]
         hover:shadow-[0_12px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)]
         relative flex items-center justify-around p-1
-      ">
+      "
+      >
         {/* Active tab background indicator */}
-        <div 
+        <div
           className="absolute h-[calc(100%-8px)] rounded-full bg-white/10 backdrop-blur-sm transition-all duration-500 ease-out"
           style={{
             width: `${100 / navItems.length}%`,
             left: `${(activeIndex * 100) / navItems.length}%`,
           }}
         />
-        
-        {navItems.map((item) => {
+
+        {navItems.map(item => {
           const Icon = item.icon;
           const isActive = pathname === item.path;
 
@@ -99,4 +104,3 @@ export function BottomNav() {
     </nav>
   );
 }
-

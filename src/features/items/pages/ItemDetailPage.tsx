@@ -25,7 +25,7 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
 
   const handleDelete = async () => {
     if (!item) return;
-    
+
     try {
       await deleteItem(item.id);
       router.push('/user/listings');
@@ -49,9 +49,7 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
       <Container className="py-8">
         <div className="text-center">
           <p className="text-red-600 mb-4">商品が見つかりません</p>
-          <Button onClick={() => router.push('/items')}>
-            商品一覧に戻る
-          </Button>
+          <Button onClick={() => router.push('/items')}>商品一覧に戻る</Button>
         </div>
       </Container>
     );
@@ -98,4 +96,3 @@ export function ItemDetailPage({ itemId, onPurchaseClick }: ItemDetailPageProps)
     </Container>
   );
 }
-

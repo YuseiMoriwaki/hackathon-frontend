@@ -53,9 +53,7 @@ export function ConfirmStep({
           />
           <div className="flex-1">
             <h4 className="font-semibold text-white mb-2">{item.title}</h4>
-            <p className="text-2xl font-bold text-blue-300">
-              ¥{item.price}
-            </p>
+            <p className="text-2xl font-bold text-blue-300">¥{item.price}</p>
           </div>
         </div>
       </div>
@@ -94,9 +92,7 @@ export function ConfirmStep({
       <div className="glass-card p-6">
         <div className="flex justify-between items-center">
           <span className="text-xl font-semibold text-white">合計金額</span>
-          <span className="text-3xl font-bold text-blue-300">
-            ¥{item.price}
-          </span>
+          <span className="text-3xl font-bold text-blue-300">¥{item.price}</span>
         </div>
       </div>
 
@@ -117,4 +113,3 @@ export function ConfirmStep({
     </div>
   );
 }
-

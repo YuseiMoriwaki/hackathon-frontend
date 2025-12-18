@@ -12,4 +12,3 @@ export { useUserListings } from './hooks/useUserListings';
 
 // Types
 export type { UserProfile as UserProfileType, UserProfileUpdate } from './types';
-

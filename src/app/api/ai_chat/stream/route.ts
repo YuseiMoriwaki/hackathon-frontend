@@ -1,7 +1,6 @@
 import { NextRequest } from 'next/server';
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || 'http://0.0.0.0:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://0.0.0.0:8000';
 
 interface MessageInput {
   role: string;
@@ -34,35 +33,32 @@ export async function POST(req: NextRequest) {
     }
 
     const transformedMessages = body.messages
-      .filter((msg: MessageInput) => msg && typeof msg.role === 'string' && typeof msg.content === 'string')
+      .filter(
+        (msg: MessageInput) =>
+          msg && typeof msg.role === 'string' && typeof msg.content === 'string'
+      )
       .map((msg: MessageInput) => ({
         role: msg.role,
         content: msg.content || '',
       }));
 
     if (transformedMessages.length === 0) {
-      return new Response(
-        JSON.stringify({ error: 'At least one valid message is required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'At least one valid message is required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Forward the request to the backend delta endpoint
-    const response = await fetch(
-      `${API_BASE_URL}/api/delta/conversations/stream`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: transformedMessages,
-        }),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/api/delta/conversations/stream`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: transformedMessages,
+      }),
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -94,4 +90,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

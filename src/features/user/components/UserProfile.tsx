@@ -14,24 +14,14 @@ export function UserProfile({ user }: UserProfileProps) {
         <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 flex items-center justify-center text-white text-3xl font-bold backdrop-blur-sm border border-white/10">
           {user.name[0]}
         </div>
-        
+
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-white mb-2">
-            {user.name}
-          </h2>
-          
-          {user.location && (
-            <p className="text-white/70 mb-2">
-              📍 {user.location}
-            </p>
-          )}
-          
-          {user.bio && (
-            <p className="text-white/80 mb-4">
-              {user.bio}
-            </p>
-          )}
-          
+          <h2 className="text-2xl font-bold text-white mb-2">{user.name}</h2>
+
+          {user.location && <p className="text-white/70 mb-2">📍 {user.location}</p>}
+
+          {user.bio && <p className="text-white/80 mb-4">{user.bio}</p>}
+
           <div className="flex gap-6 text-sm">
             <div>
               <span className="font-semibold text-white">{user.itemsCount || 0}</span>

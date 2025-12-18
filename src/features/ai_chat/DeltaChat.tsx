@@ -66,7 +66,7 @@ export default function DeltaChat({ isInitialMount }: DeltaChatProps) {
   });
 
   return (
-    <div className='flex flex-col h-full transition-all duration-300'>
+    <div className="flex flex-col h-full transition-all duration-300">
       <ChatContainer
         ref={scrollContainerRef}
         messages={messages}
@@ -77,11 +77,7 @@ export default function DeltaChat({ isInitialMount }: DeltaChatProps) {
 
       {/* Absolutely positioned ChatInput - Fixed position */}
       <div className="fixed left-0 right-0 bottom-[60px] z-110 py-4">
-        <AiChatInput
-          onSend={handleAiChatSend}
-          onStop={stopStream}
-          isLoading={isSending}
-        />
+        <AiChatInput onSend={handleAiChatSend} onStop={stopStream} isLoading={isSending} />
       </div>
     </div>
   );

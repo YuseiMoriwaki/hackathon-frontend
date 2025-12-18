@@ -14,4 +14,3 @@ export const metadata = {
   title: 'ユーザープロフィール - フリマアプリ',
   description: 'ユーザーのプロフィール',
 };
-

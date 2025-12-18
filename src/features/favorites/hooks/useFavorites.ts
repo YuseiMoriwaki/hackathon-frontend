@@ -47,4 +47,3 @@ export function useRemoveFavorite(userId: string | undefined) {
     isRemoving: isMutating,
   };
 }
-

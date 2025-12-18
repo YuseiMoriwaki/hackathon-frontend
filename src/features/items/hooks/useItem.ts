@@ -5,9 +5,8 @@ import { getItem } from '../api/itemsApi';
 import type { Item } from '../types';
 
 export function useItem(id: string) {
-  const { data, error, isLoading, mutate } = useSWR<Item>(
-    id ? `/api/items/${id}` : null,
-    () => getItem(id)
+  const { data, error, isLoading, mutate } = useSWR<Item>(id ? `/api/items/${id}` : null, () =>
+    getItem(id)
   );
 
   return {
@@ -17,4 +16,3 @@ export function useItem(id: string) {
     mutate,
   };
 }
-

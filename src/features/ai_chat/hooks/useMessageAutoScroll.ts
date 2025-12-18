@@ -38,10 +38,7 @@ export function useMessageAutoScroll({
       setTimeout(() => {
         if (!scrollContainerRef.current) return;
 
-        if (
-          streamingContainerRef?.current &&
-          streamingContainerRef.current.children.length > 0
-        ) {
+        if (streamingContainerRef?.current && streamingContainerRef.current.children.length > 0) {
           const offsetTop = streamingContainerRef.current.offsetTop;
           scrollContainerRef.current.scrollTo({
             top: offsetTop,
@@ -50,8 +47,7 @@ export function useMessageAutoScroll({
         } else {
           // No streaming messages, scroll to bottom normally
           const container = scrollContainerRef.current;
-          const targetScroll =
-            container.scrollHeight - container.clientHeight + 400; // 400 for the footer etc
+          const targetScroll = container.scrollHeight - container.clientHeight + 400; // 400 for the footer etc
           container.scrollTo({
             top: targetScroll,
             behavior: isInitialMount ? 'auto' : 'smooth',
@@ -61,12 +57,5 @@ export function useMessageAutoScroll({
     }
 
     prevMessageCountRef.current = currentCount;
-  }, [
-    messages,
-    scrollContainerRef,
-    streamingContainerRef,
-    delay,
-    headerHeight,
-    isInitialMount,
-  ]);
+  }, [messages, scrollContainerRef, streamingContainerRef, delay, headerHeight, isInitialMount]);
 }

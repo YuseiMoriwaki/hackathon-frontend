@@ -10,12 +10,12 @@ interface SearchBarProps {
   className?: string;
 }
 
-export function SearchBar({ 
-  placeholder = '検索...', 
-  value = '', 
-  onChange, 
+export function SearchBar({
+  placeholder = '検索...',
+  value = '',
+  onChange,
   onSearch,
-  className = '' 
+  className = '',
 }: SearchBarProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onSearch) {
@@ -24,7 +24,8 @@ export function SearchBar({
   };
 
   return (
-    <div className={`
+    <div
+      className={`
       flex flex-1 items-center 
       bg-white/4 backdrop-blur-sm 
       border border-black/10 
@@ -33,12 +34,13 @@ export function SearchBar({
       shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.12)]
       hover:shadow-[0_12px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)]
       ${className}
-    `}>
+    `}
+    >
       <Search className="mr-2 size-5 text-gray-400 shrink-0" />
       <input
         type="text"
         value={value}
-        onChange={(e) => onChange?.(e.target.value)}
+        onChange={e => onChange?.(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         className="w-full bg-transparent text-base text-white outline-none placeholder-white/50"
@@ -47,4 +49,3 @@ export function SearchBar({
     </div>
   );
 }
-

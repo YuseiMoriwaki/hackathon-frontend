@@ -12,4 +12,3 @@ export const metadata = {
   title: 'お気に入り - Delta',
   description: 'お気に入りの商品一覧',
 };
-

@@ -4,4 +4,3 @@ export const swrConfig = {
   shouldRetryOnError: false,
   dedupingInterval: 2000,
 };
-

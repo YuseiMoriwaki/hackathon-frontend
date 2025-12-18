@@ -12,4 +12,3 @@ export const metadata = {
   title: '商品を出品 - フリマアプリ',
   description: '新しい商品を出品',
 };
-

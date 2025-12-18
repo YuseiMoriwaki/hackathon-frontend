@@ -42,18 +42,20 @@ export async function createPurchase(request: PurchaseRequest): Promise<Purchase
 }
 
 export async function getPurchaseHistory(userId: string): Promise<Purchase[]> {
-  const purchases = await get<Array<{
-    id: string;
-    itemId: string;
-    itemTitle: string;
-    itemPrice: number;
-    itemImage: string;
-    buyerId: string;
-    sellerId: string;
-    status: string;
-    createdAt: string;
-    completedAt?: string;
-  }>>(`/purchases/users/${userId}`);
+  const purchases = await get<
+    Array<{
+      id: string;
+      itemId: string;
+      itemTitle: string;
+      itemPrice: number;
+      itemImage: string;
+      buyerId: string;
+      sellerId: string;
+      status: string;
+      createdAt: string;
+      completedAt?: string;
+    }>
+  >(`/purchases/users/${userId}`);
 
   return purchases.map(p => ({
     id: p.id,

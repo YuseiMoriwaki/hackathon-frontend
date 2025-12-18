@@ -10,4 +10,3 @@ export interface FilePreviewData {
   mime_type: string;
   file_size: number;
 }
-

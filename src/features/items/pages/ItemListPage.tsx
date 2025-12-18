@@ -27,9 +27,7 @@ export function ItemListPage() {
   if (isError) {
     return (
       <Container className="py-8">
-        <div className="text-center text-red-300">
-          商品の読み込みに失敗しました
-        </div>
+        <div className="text-center text-red-300">商品の読み込みに失敗しました</div>
       </Container>
     );
   }
@@ -39,7 +37,7 @@ export function ItemListPage() {
       {/* Fixed Search Bar */}
       <div className="fixed top-[64px] left-0 right-0 z-30 bg-transparent border-white/10 px-4 md:px-6 py-3">
         <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <SearchBar 
+          <SearchBar
             value={searchValue}
             onChange={setSearchValue}
             onSearch={handleSearch}
@@ -64,7 +62,7 @@ export function ItemListPage() {
             <span className="text-white hidden sm:inline">絞り込み</span>
           </button>
         </div>
-        
+
         {/* Collapsible Filters */}
         {isFiltersOpen && (
           <div className="max-w-7xl mx-auto mt-3">
@@ -79,7 +77,7 @@ export function ItemListPage() {
 
       <Container className="py-8 pt-20">
         <h1 className="text-3xl font-bold text-white mb-8">商品一覧</h1>
-        
+
         {/* Items Grid */}
         <div>
           {isLoading ? (
@@ -88,9 +86,7 @@ export function ItemListPage() {
             </div>
           ) : items && items.length > 0 ? (
             <>
-              <p className="text-white/70 mb-4">
-                {items.length}件の商品が見つかりました
-              </p>
+              <p className="text-white/70 mb-4">{items.length}件の商品が見つかりました</p>
               <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6">
                 {items.map(item => (
                   <ItemCard key={item.id} item={item} />
@@ -98,9 +94,7 @@ export function ItemListPage() {
               </div>
             </>
           ) : (
-            <div className="text-center text-white/50 py-16">
-              商品が見つかりませんでした
-            </div>
+            <div className="text-center text-white/50 py-16">商品が見つかりませんでした</div>
           )}
         </div>
       </Container>

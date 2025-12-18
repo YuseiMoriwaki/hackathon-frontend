@@ -53,4 +53,3 @@ export type TimerPollResponse = {
   timer_ended: boolean;
   remaining_seconds?: number;
 };
-

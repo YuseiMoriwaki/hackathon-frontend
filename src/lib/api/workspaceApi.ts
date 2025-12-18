@@ -5,4 +5,3 @@ export async function getAllWorkspaceMembersForUser(): Promise<never[]> {
   // Return empty array - functionality not implemented yet
   return [];
 }
-

@@ -32,18 +32,13 @@ const paymentOptions = [
   },
 ];
 
-export function PaymentStep({
-  paymentMethod,
-  onChange,
-  onNext,
-  onBack,
-}: PaymentStepProps) {
+export function PaymentStep({ paymentMethod, onChange, onNext, onBack }: PaymentStepProps) {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-white mb-6">支払い方法</h2>
 
       <div className="space-y-4">
-        {paymentOptions.map((option) => {
+        {paymentOptions.map(option => {
           const Icon = option.icon;
           const isSelected = paymentMethod === option.value;
 
@@ -56,16 +51,8 @@ export function PaymentStep({
               }`}
             >
               <div className="flex items-start gap-4">
-                <div
-                  className={`p-3 rounded-lg ${
-                    isSelected ? 'bg-blue-500/20' : 'bg-white/5'
-                  }`}
-                >
-                  <Icon
-                    className={`w-6 h-6 ${
-                      isSelected ? 'text-blue-300' : 'text-white/70'
-                    }`}
-                  />
+                <div className={`p-3 rounded-lg ${isSelected ? 'bg-blue-500/20' : 'bg-white/5'}`}>
+                  <Icon className={`w-6 h-6 ${isSelected ? 'text-blue-300' : 'text-white/70'}`} />
                 </div>
                 <div className="flex-1 text-left">
                   <h3
@@ -79,14 +66,10 @@ export function PaymentStep({
                 </div>
                 <div
                   className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                    isSelected
-                      ? 'border-blue-500 bg-blue-500'
-                      : 'border-white/30'
+                    isSelected ? 'border-blue-500 bg-blue-500' : 'border-white/30'
                   }`}
                 >
-                  {isSelected && (
-                    <div className="w-3 h-3 bg-white rounded-full" />
-                  )}
+                  {isSelected && <div className="w-3 h-3 bg-white rounded-full" />}
                 </div>
               </div>
             </button>
@@ -105,4 +88,3 @@ export function PaymentStep({
     </div>
   );
 }
-

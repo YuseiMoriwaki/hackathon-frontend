@@ -43,10 +43,13 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
         <div className="flex justify-between items-center">
-          <Link href="/home" className="text-2xl font-bold text-white/60 hover:text-white transition-colors flex items-center gap-2">
-              Delta
+          <Link
+            href="/home"
+            className="text-2xl font-bold text-white/60 hover:text-white transition-colors flex items-center gap-2"
+          >
+            Delta
           </Link>
-          
+
           <nav className="hidden md:flex space-x-8">
             <Link
               href="/home"
@@ -93,7 +96,7 @@ export function Header() {
                   <p className="text-sm text-white/60">ログイン中</p>
                   <p className="font-semibold text-white truncate">{user?.name}</p>
                 </div>
-                
+
                 <div className="py-1">
                   <button
                     onClick={() => {
@@ -126,7 +129,7 @@ export function Header() {
                     出品した商品
                   </button>
                 </div>
-                
+
                 <div className="border-t border-white/10">
                   <button
                     onClick={() => {
@@ -147,4 +150,3 @@ export function Header() {
     </header>
   );
 }
-

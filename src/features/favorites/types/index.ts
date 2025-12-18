@@ -4,4 +4,3 @@ export interface Favorite {
   itemId: string;
   createdAt: string;
 }
-
