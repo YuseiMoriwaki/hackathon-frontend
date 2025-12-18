@@ -3,7 +3,6 @@
 import { use, useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ItemDetailPage } from '@/features/items';
-import { BottomNav } from '@/components/layouts';
 import { GlassButton } from '@/components/ui';
 import { ArrowLeft, EllipsisVertical, Share2, Flag } from 'lucide-react';
 
@@ -87,8 +86,6 @@ export default function ItemDetailPageRoute({ params }: { params: Promise<{ id: 
       <main className="flex-1 pt-28 pb-24">
         <ItemDetailPage itemId={id} onPurchaseClick={handlePurchaseClick} />
       </main>
-
-      <BottomNav />
     </>
   );
 }

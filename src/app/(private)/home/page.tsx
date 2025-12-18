@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { SlidersHorizontal } from 'lucide-react';
-import { Container, BottomNav } from '@/components/layouts';
+import { Container } from '@/components/layouts';
 import { Button, LoadingSpinner, SearchBar } from '@/components/ui';
 import { useItems, ItemCard, SearchFilters } from '@/features/items';
 import type { ItemFilters } from '@/features/items/types';
@@ -94,8 +94,6 @@ export default function HomePage() {
           </div>
         </Container>
       </main>
-
-      <BottomNav />
     </>
   );
 }
