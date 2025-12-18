@@ -3,7 +3,7 @@
 import { use, useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ItemDetailPage } from '@/features/items';
-import { Header, BottomNav } from '@/components/layouts';
+import { BottomNav } from '@/components/layouts';
 import { GlassButton } from '@/components/ui';
 import { ArrowLeft, EllipsisVertical, Share2, Flag } from 'lucide-react';
 
@@ -30,8 +30,7 @@ export default function ItemDetailPageRoute({ params }: { params: Promise<{ id: 
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <>
       
       {/* Fixed Navigation Buttons */}
       <div className="fixed top-20 left-0 right-0 z-40 px-4 md:px-6 py-3">
@@ -95,7 +94,7 @@ export default function ItemDetailPageRoute({ params }: { params: Promise<{ id: 
       </main>
       
       <BottomNav />
-    </div>
+    </>
   );
 }
 

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
-import { Header, Container } from '@/components/layouts';
+import { Container } from '@/components/layouts';
 import { Card, LoadingSpinner, GlassButton } from '@/components/ui';
 import { useAuth } from '@/features/auth';
 import { usePurchaseHistory } from '@/features/purchase';
@@ -17,8 +17,7 @@ export default function PurchasesPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <>
       <div className="fixed top-20 left-4 z-40">
         <GlassButton onClick={() => router.back()} ariaLabel="戻る">
           <ArrowLeft className="w-5 h-5 text-white" />
@@ -79,6 +78,6 @@ export default function PurchasesPage() {
           )}
         </Container>
       </main>
-    </div>
+    </>
   );
 }

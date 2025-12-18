@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { SlidersHorizontal } from 'lucide-react';
-import { Header, Container, BottomNav } from '@/components/layouts';
+import { Container, BottomNav } from '@/components/layouts';
 import { Button, LoadingSpinner, SearchBar } from '@/components/ui';
 import { useItems, ItemCard, SearchFilters } from '@/features/items';
 import type { ItemFilters } from '@/features/items/types';
@@ -24,8 +24,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <>
       
       {/* Fixed Search Bar */}
       <div className="fixed top-[64px] left-0 right-0 z-30 bg-transparent px-4 md:px-6 py-3">
@@ -100,6 +99,6 @@ export default function HomePage() {
       </main>
       
       <BottomNav />
-    </div>
+    </>
   );
 }

@@ -1,16 +1,12 @@
 import { use } from 'react';
 import { ItemFormPage } from '@/features/items';
-import { Header } from '@/components/layouts';
 
 export default function EditItemPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1">
-        <ItemFormPage itemId={id} />
-      </main>
-    </div>
+    <main className="flex-1">
+      <ItemFormPage itemId={id} />
+    </main>
   );
 }
 

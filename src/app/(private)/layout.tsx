@@ -2,6 +2,7 @@
 
 import { AuthGuard } from '@/features/auth';
 import { GlobalUIProvider } from '@/features/ai_chat/contexts/GlobalUIContext';
+import { Header } from '@/components/layouts';
 
 export default function PrivateLayout({
   children,
@@ -11,7 +12,10 @@ export default function PrivateLayout({
   return (
     <AuthGuard>
       <GlobalUIProvider>
-      {children}
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          {children}
+        </div>
       </GlobalUIProvider>
     </AuthGuard>
   );

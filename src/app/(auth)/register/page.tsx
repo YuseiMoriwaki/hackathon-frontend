@@ -1,11 +1,7 @@
 import { RegisterForm } from '@/features/auth';
 
 export default function RegisterPage() {
-  return (
-    <div className="w-full max-w-md glass-card p-8">
-      <RegisterForm />
-    </div>
-  );
+  return <RegisterForm />;
 }
 
 export const metadata = {
