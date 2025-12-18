@@ -2,7 +2,7 @@
 
 import { use } from 'react';
 import { Header } from '@/components/layouts';
-import { CheckoutPage } from '@/features/checkout';
+import { CheckoutPage } from '@/features/purchase';
 
 export default function CheckoutPageRoute({ params }: { params: Promise<{ itemId: string }> }) {
   const { itemId } = use(params);

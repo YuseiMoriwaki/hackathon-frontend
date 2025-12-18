@@ -1,5 +1,5 @@
 import type { Item, ItemFormData, ItemFilters, ItemCategory } from '../types';
-import { get, put, del } from '@/lib/api-client';
+import { get, put, del } from '@/lib/api/api-client';
 
 // Mock data
 let mockItems: Item[] = [

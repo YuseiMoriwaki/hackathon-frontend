@@ -1,3 +1,9 @@
+// Checkout flow types
+export type CheckoutStep = 'shipping' | 'payment' | 'confirm' | 'complete';
+
+export type PaymentMethod = 'credit' | 'bank' | 'convenience';
+
+// Purchase data types
 export interface Purchase {
   id: string;
   itemId: string;
@@ -13,7 +19,7 @@ export interface Purchase {
 
 export interface PurchaseRequest {
   itemId: string;
-  paymentMethod: 'credit' | 'bank' | 'convenience';
+  paymentMethod: PaymentMethod;
   shippingAddress: ShippingAddress;
 }
 

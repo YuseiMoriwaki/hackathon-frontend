@@ -1,5 +1,5 @@
 import type { Favorite } from '../types';
-import { get, post, del } from '@/lib/api-client';
+import { get, post, del } from '@/lib/api/api-client';
 
 export async function getUserFavorites(userId: string): Promise<string[]> {
   const itemIds = await get<number[]>(`/favorites/users/${userId}`);

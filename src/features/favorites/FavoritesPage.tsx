@@ -3,7 +3,7 @@
 import { Container } from '@/components/layouts';
 import { LoadingSpinner } from '@/components/ui';
 import { useAuth } from '@/features/auth';
-import { useFavorites } from '../hooks/useFavorites';
+import { useFavorites } from './hooks/useFavorites';
 import { useItems } from '@/features/items/hooks/useItems';
 import { ItemCard } from '@/features/items/components/ItemCard';
 

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { createContext, useContext, useEffect, useState, useRef } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 import { useGlobalUI } from '@/features/ai_chat/contexts/GlobalUIContext';
 
 // Simple drag handler without @use-gesture/react

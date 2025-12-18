@@ -1,5 +1,5 @@
 import type { Purchase, PurchaseRequest } from '../types';
-import { get, post } from '@/lib/api-client';
+import { get, post } from '@/lib/api/api-client';
 
 export async function createPurchase(request: PurchaseRequest): Promise<Purchase> {
   const response = await post<{

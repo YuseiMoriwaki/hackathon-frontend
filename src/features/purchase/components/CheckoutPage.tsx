@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/layouts';
 import { LoadingSpinner, GlassButton } from '@/components/ui';
 import { useItem } from '@/features/items';
-import { usePurchase } from '@/features/purchase/hooks/usePurchase';
+import { usePurchase } from '../hooks/usePurchase';
 import type { CheckoutStep, ShippingAddress, PaymentMethod } from '../types';
 import { ProgressBar } from './ProgressBar';
 import { ShippingStep } from './ShippingStep';
@@ -215,3 +215,4 @@ export function CheckoutPage({ itemId }: CheckoutPageProps) {
     </>
   );
 }
+

@@ -1,5 +1,5 @@
 import type { UserProfile, UserProfileUpdate } from '../types';
-import { get, put } from '@/lib/api-client';
+import { get, put } from '@/lib/api/api-client';
 
 export async function getUserProfile(userId: string): Promise<UserProfile> {
   return get<UserProfile>(`/users/${userId}/profile`);
