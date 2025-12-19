@@ -3,7 +3,7 @@
  * Handles authentication tokens and common request patterns.
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export class ApiError extends Error {
   constructor(
@@ -35,7 +35,7 @@ export async function apiRequest<T = unknown>(
   };
 
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+    const response = await fetch(`${API_BASE_URL}/api${endpoint}`, config);
 
     // Handle non-JSON responses
     const contentType = response.headers.get('content-type');
