@@ -29,7 +29,7 @@ export function ItemDetail({
   const isAvailable = item.status === 'active' || item.status === 'available';
   console.log(item.status);
   const categoryLabel = ITEM_CATEGORIES.find(c => c.value === item.category)?.label;
-  const { items: recommendedItems } = useRecommendedItems(item.id, item.category);
+  const { items: recommendedItems } = useRecommendedItems(item.id);
 
   return (
     <div className="space-y-12">

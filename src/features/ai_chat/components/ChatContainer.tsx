@@ -85,7 +85,7 @@ const ChatContainer = forwardRef<HTMLDivElement, ChatContainerProps>(
             })}
 
             {/* Small spacing when no container to show */}
-            {!shouldShowContainer && <div className="h-16"></div>}
+            {!shouldShowContainer && <div className="min-h-[calc(100vh-200px)]"></div>}
 
             {/* Streaming/Recent messages container with min-height of container minus header */}
             {shouldShowContainer && (

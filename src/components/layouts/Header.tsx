@@ -45,7 +45,7 @@ export function Header() {
         <div className="flex justify-between items-center">
           <Link
             href="/home"
-            className="text-2xl font-bold text-white/60 hover:text-white transition-colors flex items-center gap-2"
+            className="text-2xl font-bold text-white/90 hover:text-white transition-colors flex items-center gap-4 ml-10"
           >
             Delta
           </Link>

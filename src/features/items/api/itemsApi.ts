@@ -1,4 +1,4 @@
-import type { Item, ItemFormData, ItemFilters, ItemCategory } from '../types';
+import type { Item, ItemFormData, ItemFilters } from '../types';
 import { get, post, put, del } from '@/lib/api/api-client';
 
 export async function getItems(filters?: ItemFilters): Promise<Item[]> {
@@ -48,10 +48,6 @@ export async function getUserItems(userId: string): Promise<Item[]> {
   return get<Item[]>(`/users/${userId}/items`);
 }
 
-export async function getRecommendedItems(
-  itemId: string,
-  category: ItemCategory,
-  limit: number = 6
-): Promise<Item[]> {
+export async function getRecommendedItems(itemId: string, limit: number = 6): Promise<Item[]> {
   return get<Item[]>(`/items/${itemId}/recommended?limit=${limit}`);
 }

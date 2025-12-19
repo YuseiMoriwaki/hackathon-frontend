@@ -1,6 +1,4 @@
-import { useCallback } from 'react';
 import { Message, AIMessage } from '../types';
-import { TimerDisplay } from './TimerDisplay';
 import { AIInitiatedMessageWrapper } from './AIInitiatedMessageWrapper';
 import { AIMessageView } from './AIMessageView';
 import { ChatItemCard } from './ChatItemCard';
@@ -19,24 +17,8 @@ type MessageItemProps = {
 };
 
 export default function MessageItem({ message, sendMessage }: MessageItemProps) {
-  // Wrapper for TimerDisplay - adapts full sendMessage to simplified version
-  const handleTimerSendMessage = useCallback(
-    async (content: string, notificationId?: number, timerCompleted?: boolean) => {
-      return sendMessage(
-        content,
-        undefined, // files
-        undefined, // mentionedMemberIds
-        undefined, // mentionedNoteIds
-        notificationId,
-        timerCompleted
-      );
-    },
-    [sendMessage]
-  );
-
   // assistantメッセージの表示
   if (message.role === 'assistant') {
-    const hasTimer = 'meta' in message && message.meta?.timer;
     const isAIInitiated = 'meta' in message && message.meta?.is_ai_initiated === true;
 
     const content = message.content;
@@ -79,11 +61,6 @@ export default function MessageItem({ message, sendMessage }: MessageItemProps) 
           <AIInitiatedMessageWrapper>{aiMessageContent}</AIInitiatedMessageWrapper>
         ) : (
           aiMessageContent
-        )}
-
-        {/* タイマー表示 - TimerDisplayが完全自己完結 */}
-        {hasTimer && 'meta' in message && message.meta?.timer && (
-          <TimerDisplay timer={message.meta.timer} sendMessage={handleTimerSendMessage} />
         )}
       </div>
     );

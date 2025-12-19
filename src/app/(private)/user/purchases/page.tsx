@@ -39,13 +39,19 @@ export default function PurchasesPage() {
                 <Link key={purchase.id} href={`/items/${purchase.itemId}`}>
                   <Card hover variant="glass">
                     <div className="flex gap-4">
-                      <Image
-                        src={purchase.itemImage}
-                        alt={purchase.itemTitle}
-                        width={100}
-                        height={100}
-                        className="w-24 h-24 object-cover rounded-lg"
-                      />
+                      {purchase.itemImage ? (
+                        <Image
+                          src={purchase.itemImage}
+                          alt={purchase.itemTitle}
+                          width={100}
+                          height={100}
+                          className="w-24 h-24 object-cover rounded-lg"
+                        />
+                      ) : (
+                        <div className="w-24 h-24 bg-white/5 rounded-lg flex items-center justify-center">
+                          <span className="text-white/40">画像なし</span>
+                        </div>
+                      )}
                       <div className="flex-1">
                         <h3 className="font-semibold text-lg mb-1 text-white">
                           {purchase.itemTitle}

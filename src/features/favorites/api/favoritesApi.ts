@@ -10,18 +10,18 @@ export async function getUserFavorites(userId: string): Promise<string[]> {
 export async function addFavorite(userId: string, itemId: string): Promise<Favorite> {
   const response = await post<{
     id: string;
-    user_id: string;
-    item_id: number;
-    created_at: string;
+    userId: string; // alias for user_id
+    itemId: number; // alias for item_id
+    createdAt: string; // alias for created_at
   }>('/favorites', {
     item_id: parseInt(itemId, 10),
   });
 
   return {
     id: response.id,
-    userId: response.user_id,
-    itemId: response.item_id.toString(),
-    createdAt: response.created_at,
+    userId: response.userId,
+    itemId: response.itemId.toString(),
+    createdAt: response.createdAt,
   };
 }
 

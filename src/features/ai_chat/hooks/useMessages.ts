@@ -3,15 +3,11 @@
 import { useState } from 'react';
 import type { Message } from '../types';
 
-export interface UseMessagesOptions {
-  apiBaseUrl?: string;
-}
-
 /**
  * Simplified messages hook - no thread fetching
  * Messages are managed in memory only
  */
-export function useMessages({ apiBaseUrl: _apiBaseUrl = '/api' }: UseMessagesOptions = {}) {
+export function useMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading] = useState(false);
   const [error] = useState<string | null>(null);
