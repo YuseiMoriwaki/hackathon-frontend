@@ -1,5 +1,5 @@
 import type { Item, ItemFormData, ItemFilters, ItemCategory } from '../types';
-import { get, put, del } from '@/lib/api/api-client';
+import { get, post, put, del } from '@/lib/api/api-client';
 
 export async function getItems(filters?: ItemFilters): Promise<Item[]> {
   const params = new URLSearchParams();
@@ -23,40 +23,17 @@ export async function getItem(id: string): Promise<Item> {
 }
 
 export async function createItem(data: ItemFormData): Promise<Item> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // Get current user from localStorage (same logic as Header)
-      let currentUser = null;
-      if (typeof window !== 'undefined') {
-        const userStr = localStorage.getItem('user');
-        if (userStr) {
-          try {
-            currentUser = JSON.parse(userStr);
-          } catch (e) {
-            console.error('Failed to parse user from localStorage', e);
-          }
-        }
-      }
-
-      // Ensure user is authenticated
-      if (!currentUser) {
-        reject(new Error('ユーザー情報が見つかりません。ログインしてください。'));
-        return;
-      }
-
-      const newItem: Item = {
-        ...data,
-        id: Date.now().toString(),
-        status: 'active',
-        sellerId: currentUser.id, // Use current user's ID
-        sellerName: currentUser.name, // Use current user's name
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-
-      resolve(newItem);
-    }, 800);
+  const response = await post<Item>('/items', {
+    title: data.title,
+    description: data.description,
+    price: data.price,
+    category: data.category,
+    condition: 'Good', // Default condition
+    brand_name: null, // Optional, can be added to form later
+    images: data.images || [],
   });
+
+  return response;
 }
 
 export async function updateItem(id: string, data: Partial<ItemFormData>): Promise<Item> {
